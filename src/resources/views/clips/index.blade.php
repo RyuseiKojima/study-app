@@ -1,22 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  <script src="{{ asset('js/app.js') }}"></script>
 
-    <title>Clip</title>
-</head>
-<body>
+  @extends('layouts.app')
+
 <h1>記事一覧</h1>
 
 <form action="logout" method="POST">
   <!-- @method('DELETE') -->
   @csrf
     <div>
-      <button type="submit"  class="btn btn-primary btn-lg">{{ __('ログアウト') }}</button>
+      <button type="submit" >{{ __('ログアウト') }}</button>
     </div>
 </form>
 <!--検索フォーム-->
@@ -26,7 +17,7 @@
   <div>
     <input type="text" name="keyword" />
   </div>
-  <!--絞り込み-->  
+  <!--絞り込み-->
   <label>上映中かどうか</label>
   <div>
     <input type="radio" id="all" name="is_showing" value="" checked />すべて
@@ -37,7 +28,7 @@
   <div>
     <input type="radio" id="上映中" name="is_showing" value="0" />上映予定
   </div>
-  
+
   <div>
     <button type="submit" class="btn btn-primary ">検索</button>
   </div>
@@ -66,5 +57,3 @@
       </td>
     @endforeach
   </table>
-</body>
-</html>
