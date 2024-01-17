@@ -1,36 +1,12 @@
 
-  @extends('layouts.app')
+@extends('layouts.app')
 
-<h1>記事一覧</h1>
-
-<form action="logout" method="POST">
-  <!-- @method('DELETE') -->
-  @csrf
-    <div>
-      <button type="submit" >{{ __('ログアウト') }}</button>
-    </div>
-</form>
-<!--検索フォーム-->
-<form method="GET" action="clips">
-  <label for="keyword">キーワード</label>
-  <!--入力-->
-  <div>
-    <input type="text" name="keyword" />
-  </div>
-  <!--絞り込み-->
-  <label>上映中かどうか</label>
-  <div>
-    <input type="radio" id="all" name="is_showing" value="" checked />すべて
-  </div>
-  <div>
-    <input type="radio" id="上映予定" name="is_showing" value="1" />上映中
-  </div>
-  <div>
-    <input type="radio" id="上映中" name="is_showing" value="0" />上映予定
-  </div>
+@section('content')
+<h1 class="">記事一覧</h1>
+<div class="fs-3">記事一覧</div>
 
   <div>
-    <button type="submit" class="btn btn-primary ">検索</button>
+    <button type="submit" class="btn btn-primary my-1">新規登録</button>
   </div>
 </form>
 <table border="1">
@@ -57,3 +33,4 @@
       </td>
     @endforeach
   </table>
+@endsection
