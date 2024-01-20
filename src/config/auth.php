@@ -1,10 +1,11 @@
 <?php
+// 認証パラメータを定義
 
 declare(strict_types=1);
 
 return [
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
     |--------------------------------------------------------------------------
@@ -15,12 +16,12 @@ return [
     |
     */
 
-    'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
-    ],
+  'defaults' => [
+    'guard' => 'web',
+    'passwords' => 'users',
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Authentication Guards
     |--------------------------------------------------------------------------
@@ -37,14 +38,18 @@ return [
     |
     */
 
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
+  'guards' => [
+    'web' => [
+      'driver' => 'session',
+      'provider' => 'users',
     ],
+    'admin' => [   // ここ追加
+      'driver' => 'session',
+      'provider' => 'admin_users', // providerに追加した名前
+    ],
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | User Providers
     |--------------------------------------------------------------------------
@@ -61,19 +66,19 @@ return [
     |
     */
 
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+  // ユーザ情報の管理方法を指定
+  'providers' => [
+    'users' => [
+      'driver' => 'eloquent',
+      'model' => App\Models\User::class,
     ],
+    'admin_users' => [ // ここ追加
+      'driver' => 'eloquent',
+      'model' => App\Models\AdminUser::class, //make:modelしたクラス名
+    ],
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Resetting Passwords
     |--------------------------------------------------------------------------
@@ -88,16 +93,16 @@ return [
     |
     */
 
-    'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => 'password_resets',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
+  'passwords' => [
+    'users' => [
+      'provider' => 'users',
+      'table' => 'password_resets',
+      'expire' => 60,
+      'throttle' => 60,
     ],
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Password Confirmation Timeout
     |--------------------------------------------------------------------------
@@ -108,6 +113,6 @@ return [
     |
     */
 
-    'password_timeout' => 10800,
+  'password_timeout' => 10800,
 
 ];
