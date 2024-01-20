@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>ログイン（管理者）</title>
+  <title>ログイン</title>
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
   <!-- Styles -->
@@ -16,16 +16,10 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
-          <div class="card-header">管理者ログイン</div>
+          <div class="card-header">ログイン</div>
 
           <div class="card-body">
-
-            @if ($errors->any())
-              @foreach ($errors->all() as $error)
-                <div>{{ $error }}</div>
-              @endforeach
-            @endif
-            <form method="POST" action="{{ route('admin.login') }}">
+            <form method="POST" action="{{ route('login') }}">
               @csrf
 
               <div class="row mb-3">

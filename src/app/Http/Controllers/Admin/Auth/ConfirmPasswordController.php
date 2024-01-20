@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin\Auth;
+
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
