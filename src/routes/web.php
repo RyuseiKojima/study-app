@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClipController;
 
@@ -17,8 +18,19 @@ use App\Http\Controllers\ClipController;
 */
 
 Route::get('/', static function () {
-    return view('welcome');
+  return view('welcome');
 });
+
+Route::get('/admin/login', function () {
+  return view('admin/login');
+})->middleware('guest:admin');
+
+Route::post('/admin/login', [\App\Http\Controllers\LoginController::class, 'adminLogin'])->name('admin.login');
+Route::post('/admin/logout', [\App\Http\Controllers\LoginController::class, 'adminLogout'])->name('admin.logout');
+
+Route::get('/admin/dashboard', function () {
+  return view('admin/dashboard');
+})->middleware('auth:admin');
 
 // Clip
 Route::get('/clips', [ClipController::class, 'index'])->name('clips.index');

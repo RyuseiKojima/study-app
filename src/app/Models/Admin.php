@@ -6,11 +6,12 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+// login周りのModelは以下で実装する必要あり
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
   use HasApiTokens;
   use HasFactory;
@@ -21,6 +22,7 @@ class User extends Authenticatable
    *
    * @var array<int, string>
    */
+  // createやupdateを受け付ける
   protected $fillable = [
     'name',
     'email',
@@ -32,7 +34,6 @@ class User extends Authenticatable
    *
    * @var array<int, string>
    */
-  // 秘匿性の高い属性に付与してJSONに含まれなくなる
   protected $hidden = [
     'password',
     'remember_token',
@@ -43,6 +44,7 @@ class User extends Authenticatable
    *
    * @var array<string, string>
    */
+  // DBから得られたデータを自動変換する
   protected $casts = [
     'email_verified_at' => 'datetime',
   ];
