@@ -44,14 +44,10 @@ return [
       'driver' => 'session',
       'provider' => 'users',
     ],
-    'members' => [
-      'driver' => 'session',
-      'provider' => 'users',
-    ],
-    'admins' => [
-      'driver' => 'session',
-      'provider' => 'admins',
-    ],
+    'admin' => [                // 追加
+      'driver' => 'session',  // 追加
+      'provider' => 'admins', // 追加
+    ],                          // 追加
   ],
 
   /*
@@ -77,14 +73,10 @@ return [
       'driver' => 'eloquent',
       'model' => App\Models\User::class,
     ],
-    'admins' => [
-      'driver' => 'eloquent',
-      'model' => App\Models\Admin::class,
-    ],
-    'members' => [
-      'driver' => 'eloquent',
-      'model' => App\Models\User::class,
-    ],
+    'admins' => [                           // 追加
+      'driver' => 'eloquent',             // 追加
+      'model' => App\Models\Admin::class, // 追加
+    ],                                      // 追加
   ],
 
   /*
@@ -109,12 +101,12 @@ return [
       'expire' => 60,
       'throttle' => 60,
     ],
-    'admins' => [
-      'provider' => 'admins',
-      'table' => 'password_resets',
-      'expire' => 15,
-      'throttle' => 60,
-    ],
+    'admins' => [                     // 追加
+      'provider' => 'admins',       // 追加
+      'table' => 'password_resets', // 追加
+      'expire' => 60,               // 追加
+      'throttle' => 60,             // 追加
+    ],                                // 追加
   ],
 
   /*

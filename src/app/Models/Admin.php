@@ -15,6 +15,7 @@ class Admin extends Authenticatable
 {
   use HasApiTokens;
   use HasFactory;
+  // メールを送れるようにする
   use Notifiable;
 
   /**

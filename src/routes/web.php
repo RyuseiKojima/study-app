@@ -1,34 +1,36 @@
 <?php
 
-declare(strict_types=1);
-
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ClipController;
 
-include __DIR__ . '/admin.php';
+Route::get('/', function () {
+  return view('welcome');
+});
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/dashboard', function () {
+  return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Auth::routes();
+Route::middleware('auth')->group(function () {
+  Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+  Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+  Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+require __DIR__ . '/auth.php';
 
-// Clip
-Route::prefix('clips')->group(function () {
-  Route::get('/', [ClipController::class, 'index'])->name('clips.index');
-  Route::get('/create', [ClipController::class, 'create'])->name('clips.create');
-  Route::post('/store', [ClipController::class, 'store'])->name('clips.store');
-  Route::get('/{id}', [ClipController::class, 'detail'])->name('clips.detail');
-  Route::get('/{id}/edit', [ClipController::class, 'edit'])->name('clips.edit');
-  Route::patch('/{id}/update', [ClipController::class, 'update'])->name('clips.update');
-  Route::delete('/{id}/destroy', [ClipController::class, 'destroy'])->name('clips.destroy');
+use App\Http\Controllers\ProfileController as ProfileOfAdminController;
+
+Route::prefix('admin')->name('admin.')->group(function () {
+  Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+  })->middleware(['auth:admin', 'verified'])->name('dashboard');
+
+  Route::middleware('auth:admin')->group(function () {
+    Route::get('/profile', [ProfileOfAdminController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileOfAdminController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileOfAdminController::class, 'destroy'])->name('profile.destroy');
+  });
+
+  require __DIR__ . '/admin.php';
 });
