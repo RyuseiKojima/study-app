@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-use App\Http\Controllers\ProfileController as ProfileOfAdminController;
+use App\Http\Controllers\Admin\ProfileController as ProfileOfAdminController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
   Route::get('/dashboard', function () {
