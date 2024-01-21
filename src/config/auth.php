@@ -17,7 +17,7 @@ return [
     */
 
   'defaults' => [
-    'guard' => 'user', //webから変更
+    'guard' => 'web',
     'passwords' => 'users',
   ],
 
@@ -39,7 +39,11 @@ return [
     */
 
   'guards' => [
-    'user' => [ //webから変更
+    'web' => [
+      'driver' => 'session',
+      'provider' => 'users',
+    ],
+    'members' => [
       'driver' => 'session',
       'provider' => 'users',
     ],
@@ -72,9 +76,13 @@ return [
       'driver' => 'eloquent',
       'model' => App\Models\User::class,
     ],
+    'members' => [
+      'driver' => 'eloquent',
+      'model' => App\Models\User::class,
+    ],
     'admins' => [ // ここ追加
       'driver' => 'eloquent',
-      'model' => App\Models\AdminUser::class, //make:modelしたクラス名
+      'model' => App\Models\Admin::class, //make:modelしたクラス名
     ],
   ],
 
