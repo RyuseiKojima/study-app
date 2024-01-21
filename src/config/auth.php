@@ -47,7 +47,7 @@ return [
       'driver' => 'session',
       'provider' => 'users',
     ],
-    'admin' => [   // ここ追加
+    'admins' => [   // ここ追加
       'driver' => 'session',
       'provider' => 'admins', // providerに追加した名前
     ],

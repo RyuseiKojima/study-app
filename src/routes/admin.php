@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\HomeController;
-// use App\Http\Controllers\Admin\RegisterController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ClipController;
 use Illuminate\Auth\Events\Login;
 
 Route::prefix('admin')->group(function () {

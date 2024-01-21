@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClipController;
 
 include __DIR__ . '/admin.php';
+include __DIR__ . '/mypage.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +21,11 @@ include __DIR__ . '/admin.php';
 |
 */
 
-Route::get('/', static function () {
-  return view('welcome');
-});
+
+
+// Route::get('/', static function () {
+//   return view('welcome');
+// });
 
 
 
@@ -37,4 +40,4 @@ Route::delete('/clips/{id}/destroy', [ClipController::class, 'destroy'])->name('
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');

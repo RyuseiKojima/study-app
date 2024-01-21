@@ -20,9 +20,9 @@
 
 <body>
   <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light bg-grey shadow-sm">
       <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand" href="{{ url('/admin') }}">
           Tech Share
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -40,15 +40,9 @@
           <ul class="navbar-nav ms-auto">
             <!-- Authentication Links -->
             @guest
-              @if (Route::has('admin.login'))
+              @if (Route::has('admin.login.index'))
                 <li class="nav-item">
-                  <a class="nav-link" href="{{ route('admin.login') }}">{{ __('ログイン') }}</a>
-                </li>
-              @endif
-
-              @if (Route::has('admin.register'))
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route('admin.register') }}">{{ __('登録') }}</a>
+                  <a class="nav-link" href="{{ route('admin.login.index') }}">{{ __('ログイン') }}</a>
                 </li>
               @endif
             @else
@@ -59,13 +53,13 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{{ route('admin.logout') }}"
+                  <a class="dropdown-item" href="{{ route('admin.login.logout') }}"
                     onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                    document.getElementById('logout-form').submit();">
                     {{ __('Logout') }}
                   </a>
 
-                  <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
+                  <form id="logout-form" action="{{ route('admin.login.logout') }}" method="POST" class="d-none">
                     @csrf
                   </form>
                 </div>
