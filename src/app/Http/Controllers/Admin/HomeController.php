@@ -8,8 +8,8 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-  public function dashboard()
+  public function home()
   {
-    return view('admin.home.dashboard');
+    return view('admin.home');
   }
 }

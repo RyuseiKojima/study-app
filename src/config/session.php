@@ -128,10 +128,12 @@ return [
     |
     */
 
+    // 双方のログインログアウトに影響
     'cookie' => env(
         'SESSION_COOKIE',
         Str::slug(env('APP_NAME', 'laravel'), '_') . '_session'
     ),
+    'cookie_admin' => Str::slug(env('APP_NAME', 'laravel'), '_') . '_session_admin',
 
     /*
     |--------------------------------------------------------------------------

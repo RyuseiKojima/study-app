@@ -15,7 +15,10 @@ class LoginController extends Controller
 {
   public function index()
   {
-    return view('admin.login.index');
+    if (Auth::guard('admins')->user()) {
+      return redirect()->route('admin.home');
+    }
+    return view('admin.auth.login');
   }
 
   public function login(Request $request)
@@ -25,7 +28,7 @@ class LoginController extends Controller
 
     //ログイン実施
     if (Auth::guard('admins')->attempt($credentials)) {
-      return redirect()->route('admin.dashboard')->with([
+      return redirect()->route('admin.home')->with([
         'login_msg' => 'ログインしました。',
       ]);
     }
@@ -38,6 +41,8 @@ class LoginController extends Controller
   public function logout(Request $request)
   {
     Auth::guard('admins')->logout();
+    // ログアウト
+    $request->session()->invalidate();
     $request->session()->regenerateToken();
 
     return redirect()->route('admin.login.index')->with([

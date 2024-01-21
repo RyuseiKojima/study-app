@@ -38,6 +38,7 @@ return [
     |
     */
 
+  //リクエストごとにユーザを認証
   'guards' => [
     'web' => [
       'driver' => 'session',
@@ -47,9 +48,9 @@ return [
       'driver' => 'session',
       'provider' => 'users',
     ],
-    'admins' => [   // ここ追加
+    'admins' => [
       'driver' => 'session',
-      'provider' => 'admins', // providerに追加した名前
+      'provider' => 'admins',
     ],
   ],
 
@@ -76,13 +77,13 @@ return [
       'driver' => 'eloquent',
       'model' => App\Models\User::class,
     ],
+    'admins' => [
+      'driver' => 'eloquent',
+      'model' => App\Models\Admin::class,
+    ],
     'members' => [
       'driver' => 'eloquent',
       'model' => App\Models\User::class,
-    ],
-    'admins' => [ // ここ追加
-      'driver' => 'eloquent',
-      'model' => App\Models\Admin::class, //make:modelしたクラス名
     ],
   ],
 
