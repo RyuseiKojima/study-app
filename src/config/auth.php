@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 return [
 
-  /*
+    /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
     |--------------------------------------------------------------------------
@@ -16,12 +16,12 @@ return [
     |
     */
 
-  'defaults' => [
-    'guard' => 'web',
-    'passwords' => 'users',
-  ],
+    'defaults' => [
+        'guard' => 'web',
+        'passwords' => 'users',
+    ],
 
-  /*
+    /*
     |--------------------------------------------------------------------------
     | Authentication Guards
     |--------------------------------------------------------------------------
@@ -38,19 +38,19 @@ return [
     |
     */
 
-  //リクエストごとにユーザを認証
-  'guards' => [
-    'web' => [
-      'driver' => 'session',
-      'provider' => 'users',
+    //リクエストごとにユーザを認証
+    'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+        'admin' => [                // 追加
+            'driver' => 'session',  // 追加
+            'provider' => 'admins', // 追加
+        ],                          // 追加
     ],
-    'admin' => [                // 追加
-      'driver' => 'session',  // 追加
-      'provider' => 'admins', // 追加
-    ],                          // 追加
-  ],
 
-  /*
+    /*
     |--------------------------------------------------------------------------
     | User Providers
     |--------------------------------------------------------------------------
@@ -67,19 +67,19 @@ return [
     |
     */
 
-  // ユーザ情報の管理方法を指定
-  'providers' => [
-    'users' => [
-      'driver' => 'eloquent',
-      'model' => App\Models\User::class,
+    // ユーザ情報の管理方法を指定
+    'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+        'admins' => [                           // 追加
+            'driver' => 'eloquent',             // 追加
+            'model' => App\Models\Admin::class, // 追加
+        ],                                      // 追加
     ],
-    'admins' => [                           // 追加
-      'driver' => 'eloquent',             // 追加
-      'model' => App\Models\Admin::class, // 追加
-    ],                                      // 追加
-  ],
 
-  /*
+    /*
     |--------------------------------------------------------------------------
     | Resetting Passwords
     |--------------------------------------------------------------------------
@@ -94,22 +94,22 @@ return [
     |
     */
 
-  'passwords' => [
-    'users' => [
-      'provider' => 'users',
-      'table' => 'password_resets',
-      'expire' => 60,
-      'throttle' => 60,
+    'passwords' => [
+        'users' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'admins' => [                     // 追加
+            'provider' => 'admins',       // 追加
+            'table' => 'password_resets', // 追加
+            'expire' => 60,               // 追加
+            'throttle' => 60,             // 追加
+        ],                                // 追加
     ],
-    'admins' => [                     // 追加
-      'provider' => 'admins',       // 追加
-      'table' => 'password_resets', // 追加
-      'expire' => 60,               // 追加
-      'throttle' => 60,             // 追加
-    ],                                // 追加
-  ],
 
-  /*
+    /*
     |--------------------------------------------------------------------------
     | Password Confirmation Timeout
     |--------------------------------------------------------------------------
@@ -120,6 +120,6 @@ return [
     |
     */
 
-  'password_timeout' => 10800,
+    'password_timeout' => 10800,
 
 ];
