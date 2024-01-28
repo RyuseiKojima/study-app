@@ -9,9 +9,7 @@ Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('home');
 
-Route::resource([
-    'clips' => ClipController::class,
-]);
+Route::resource('clips', ClipController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
