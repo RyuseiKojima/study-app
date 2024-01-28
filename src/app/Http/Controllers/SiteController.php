@@ -1,22 +1,19 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Http\Controllers;
 
-use App\Models\Clip;
 use Illuminate\Http\Request;
 
-class ClipController extends Controller
+class SiteController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Clip $clip)
+    public function index()
     {
-        return view('clips.index')->with(['clips' => $clip->getOrderBy()]);
+        //
     }
 
     /**
@@ -32,7 +29,7 @@ class ClipController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -43,10 +40,10 @@ class ClipController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Clip $clip
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Clip $clip)
+    public function show($id)
     {
         //
     }
@@ -54,10 +51,10 @@ class ClipController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Clip $clip
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Clip $clip)
+    public function edit($id)
     {
         //
     }
@@ -65,11 +62,11 @@ class ClipController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Clip $clip
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Clip $clip)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -77,10 +74,10 @@ class ClipController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Clip $clip
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Clip $clip)
+    public function destroy($id)
     {
         //
     }
