@@ -26,11 +26,17 @@ class Clip extends Model
         'url',
         'site',
         'category',
+        'user_id',
         'memo',
     ];
 
     public function getOrderBy()
     {
         return $this->orderBy('id', 'DESC')->get();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
     }
 }

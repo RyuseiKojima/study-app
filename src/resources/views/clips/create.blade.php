@@ -11,6 +11,8 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <form method="POST" action="{{ route('clips.store') }}">
                     @csrf
+                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+
 
                     <div>
                         <x-input-label for="title" :value="__('タイトル')" />

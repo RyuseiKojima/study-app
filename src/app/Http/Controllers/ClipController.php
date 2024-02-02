@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Clip;
 use App\Http\Requests\ClipRequest;
+use Illuminate\Support\Facades\Auth;
 
 
 class ClipController extends Controller
@@ -27,7 +28,8 @@ class ClipController extends Controller
      */
     public function create()
     {
-        return view('clips.create');
+        $user = Auth::user();
+        return view('clips.create')->with(['user' => $user]);
     }
 
     /**
