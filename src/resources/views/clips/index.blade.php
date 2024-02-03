@@ -9,18 +9,28 @@
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div>
-                    <button class="btn btn-primary my-1"
-                        onclick="location.href='{{ route('clips.create') }}'">新規作成</button>
-                </div>
+
                 <div class="p-6 text-gray-900">
-                    <table class="table table-striped">
+                    @if (session('message'))
+                        <div class="bg-success text-center py-3 my-0">
+                            {{ session('message') }}
+                        </div>
+                    @endif
+                    <div>
+                        <button class="btn btn-primary my-1"
+                            onclick="location.href='{{ route('clips.create') }}'">新規作成</button>
+                    </div>
+                    <table class="table table-striped mt-3">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">タイトル</th>
                                 <th scope="col">サイト</th>
                                 <th scope="col">カテゴリ</th>
+                                <th>作成日時</th>
+                                <th>更新日時</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,6 +42,19 @@
                                             rel="noopener noreferrer">{{ $clip->title }}</a></td>
                                     <td>{{ $clip->site }}</td>
                                     <td>{{ $clip->category }}</td>
+                                    <td>{{ $clip->created_at }}</td>
+                                    <td>{{ $clip->updated_at }}</td>
+                                    <td>
+                                        <a href="{{ route('clips.edit', $clip->id) }}"
+                                            class="btn btn-success btn-sm">編集</a>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('clips.destroy', $clip->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">削除</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

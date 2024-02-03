@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ClipRequest extends FormRequest
+class ClipStoreRequest extends FormRequest
 {
     public function authorize()
     {
