@@ -23,7 +23,6 @@ class ClipRequest extends FormRequest
             'site' => ['required'],
             'category' => ['required'],
             'user_id' => ['required'],
-            'memo' => ['required'],
         ];
     }
 }

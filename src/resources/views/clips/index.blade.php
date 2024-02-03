@@ -28,7 +28,8 @@
                                 <tr>
                                     <th scope="row">{{ $clip->id }}</th>
 
-                                    <td><a href="{{ $clip->url }}">{{ $clip->title }}</a></td>
+                                    <td><a href="{{ $clip->url }}" target="_blank"
+                                            rel="noopener noreferrer">{{ $clip->title }}</a></td>
                                     <td>{{ $clip->site }}</td>
                                     <td>{{ $clip->category }}</td>
                                 </tr>
