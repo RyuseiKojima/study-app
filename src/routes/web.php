@@ -2,12 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ClipController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
 
 Route::resource('clips', ClipController::class);
 

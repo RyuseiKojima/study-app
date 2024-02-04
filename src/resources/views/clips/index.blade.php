@@ -23,7 +23,6 @@
                     <table class="table table-striped mt-3">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
                                 <th scope="col">タイトル</th>
                                 <th scope="col">サイト</th>
                                 <th scope="col">カテゴリ</th>
@@ -36,8 +35,6 @@
                         <tbody>
                             @foreach ($clips as $clip)
                                 <tr>
-                                    <th scope="row">{{ $clip->id }}</th>
-
                                     <td><a href="{{ $clip->url }}" target="_blank"
                                             rel="noopener noreferrer">{{ $clip->title }}</a></td>
                                     <td>{{ $clip->site }}</td>
@@ -46,7 +43,7 @@
                                     <td>{{ $clip->updated_at }}</td>
                                     <td>
                                         <a href="{{ route('clips.edit', $clip->id) }}"
-                                            class="btn btn-success btn-sm">編集</a>
+                                            class="btn btn-success btn-sm">更新</a>
                                     </td>
                                     <td>
                                         <form action="{{ route('clips.destroy', $clip->id) }}" method="post">
