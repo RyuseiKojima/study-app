@@ -12,7 +12,7 @@
 
                 <div class="p-6 text-gray-900">
                     @if (session('message'))
-                        <div class="bg-success text-center py-3 my-0">
+                        <div class="alert alert-success">
                             {{ session('message') }}
                         </div>
                     @endif

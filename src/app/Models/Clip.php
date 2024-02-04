@@ -32,7 +32,7 @@ class Clip extends Model
 
     public function getOrderBy()
     {
-        return $this->orderBy('id', 'DESC')->get();
+        return $this->orderBy('updated_at', 'DESC')->get();
     }
 
     public function user()
