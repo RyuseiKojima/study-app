@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Clip extends Model
 {
@@ -31,12 +32,19 @@ class Clip extends Model
 
     public function getOrderBy()
     {
-        return $this->orderBy('updated_at', 'DESC')->get();
+        return DB::table('clips')
+            ->join('users', 'clips.user_id', '=', 'users.id')
+            ->orderBy('clips.updated_at', 'DESC')
+            ->get();
     }
 
     public function yourClips($id)
     {
-        return $this->where('user_id', $id)->orderBy('updated_at', 'DESC')->get();
+        return DB::table('clips')
+            ->join('users', 'clips.user_id', '=', 'users.id')
+            ->where('user_id', $id)
+            ->orderBy('clips.updated_at', 'DESC')
+            ->get();
     }
 
     public function user()
