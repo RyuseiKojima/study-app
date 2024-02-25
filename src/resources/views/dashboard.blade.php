@@ -14,7 +14,7 @@
                             onclick="location.href='{{ route('clips.index') }}'">記事一覧</button>
                     </div>
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight mt-3">
-                        テスト
+                        あなたの投稿
                     </h2>
                     <table class="table table-striped">
                         <thead>
@@ -53,7 +53,7 @@
                         </tbody>
                     </table>
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight mt-3">
-                        テスト
+                        すべての投稿
                     </h2>
                     <table class="table table-striped">
                         <thead>
