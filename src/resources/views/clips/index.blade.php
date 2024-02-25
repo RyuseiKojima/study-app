@@ -33,7 +33,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($clips as $clip)
+                            @foreach ($allClips as $clip)
                                 <tr>
                                     <td><a href="{{ $clip->url }}" target="_blank"
                                             rel="noopener noreferrer">{{ $clip->title }}</a></td>

@@ -34,6 +34,11 @@ class Clip extends Model
         return $this->orderBy('updated_at', 'DESC')->get();
     }
 
+    public function yourClips($id)
+    {
+        return $this->where('user_id', $id)->orderBy('updated_at', 'DESC')->get();
+    }
+
     public function user()
     {
         return $this->belongsTo('App\Models\User');

@@ -19,7 +19,10 @@ class ClipController extends Controller
      */
     public function index(Clip $clips)
     {
-        return view('clips.index')->with(['clips' => $clips->getOrderBy()]);
+        $user = Auth::user();
+        $allClips = $clips->getOrderBy();
+        $yourClips = $clips->yourClips($user['id']);
+        return view('clips.index')->with(['allClips' => $allClips, 'yourClips' => $yourClips]);
     }
 
     /**

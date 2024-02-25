@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Clip;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -22,6 +23,9 @@ class HomeController extends Controller
 
     public function index(Clip $clips)
     {
-        return view('dashboard')->with(['clips' => $clips->getOrderBy()]);
+        $user = Auth::user();
+        $allClips = $clips->getOrderBy();
+        $yourClips = $clips->yourClips($user['id']);
+        return view('dashboard')->with(['allClips' => $allClips, 'yourClips' => $yourClips]);
     }
 }
