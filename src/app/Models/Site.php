@@ -14,6 +14,5 @@ class Site extends Model
      */
     protected $table = 'sites';
 
-    protected $timestamps = false;
     use HasFactory;
 }
