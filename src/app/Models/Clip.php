@@ -51,4 +51,9 @@ class Clip extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public function clip()
+    {
+        return $this->belongsTo('App\Models\Clip');
+    }
 }
