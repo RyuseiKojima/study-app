@@ -45,9 +45,12 @@
 
                         <div class="mt-4">
                             <x-input-label for="category" :value="__('カテゴリ')" />
+                            @foreach ($categories as $category)
+                                <input type="checkbox" class="btn-check" name="{{ $category->id }}"
+                                    id="{{ $category->name }}" autocomplete="off">
+                                <label class="btn mb-1" for="{{ $category->id }}">{{ $category->name }}</label>
+                            @endforeach
 
-                            <x-text-input id="category" class="block mt-1 w-full" type="text" name="category"
-                                required />
 
                             <x-input-error :messages="$errors->get('category')" class="mt-2" />
                         </div>

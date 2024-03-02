@@ -36,7 +36,8 @@ class ClipController extends Controller
     {
         $user = Auth::user();
         $getSites = $sites->getSites();
-        return view('clips.create')->with(['user' => $user, 'sites' => $getSites, 'categories' => $categories]);
+        $getCategories = $categories->getCategories();
+        return view('clips.create')->with(['user' => $user, 'sites' => $getSites, 'categories' => $getCategories]);
     }
 
     /**
