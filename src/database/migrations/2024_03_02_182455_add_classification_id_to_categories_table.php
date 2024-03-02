@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('clips', function (Blueprint $table) {
-            $table->foreignId('category_id')->constrained('categories')->nullable();
+        Schema::table('categories', function (Blueprint $table) {
+            $table->foreignId('classification_id')->constrained('classifications');
         });
     }
 
@@ -25,9 +25,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('clips', function (Blueprint $table) {
-            $table->dropForeign('clips_category_id_foreign');
-            $table->dropColumn('category_id');
+        Schema::table('categories', function (Blueprint $table) {
+            $table->dropForeign('categories_classification_id_foreign');
+            $table->dropColumn('classification_id');
         });
     }
 };

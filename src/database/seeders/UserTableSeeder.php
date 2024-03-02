@@ -5,8 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB; //←追加
+use Illuminate\Support\Facades\Hash;
 
-class SiteTableSeeder extends Seeder
+class UserTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,13 +16,10 @@ class SiteTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('sites')->insert([
-            ['name' => 'Qiita'],
-            ['name' => 'Zenn'],
-            ['name' => 'Stack Overflow'],
-            ['name' => 'GitHub'],
-            ['name' => 'YouTube'],
-            ['name' => 'その他'],
+        DB::table('users')->insert([
+            'name' => 'test',
+            'email' => 'test@gmail.com',
+            'password' => Hash::make('test0119'),
         ]);
     }
 }

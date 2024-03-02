@@ -3,16 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
-class Site extends Model
+class Classification extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'sites';
+    protected $table = 'classifications';
 
     /**
      * The attributes that are mass assignable.
@@ -22,15 +21,4 @@ class Site extends Model
     protected $fillable = [
         'name',
     ];
-
-    public function getSites()
-    {
-        return DB::table('sites')
-            ->get();
-    }
-
-    public function clips()
-    {
-        return $this->hasMany('App\Models\Clip');
-    }
 }

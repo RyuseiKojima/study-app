@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,5 +25,10 @@ class Category extends Model
     public function clips()
     {
         return $this->hasMany('App\Models\Clip');
+    }
+
+    public function classification()
+    {
+        return $this->belongsto('App\Models\Classification');
     }
 }

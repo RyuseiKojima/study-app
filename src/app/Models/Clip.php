@@ -34,6 +34,8 @@ class Clip extends Model
     {
         return DB::table('clips')
             ->join('users', 'clips.user_id', '=', 'users.id')
+            ->join('sites', 'clips.site_id', '=', 'sites.id')
+            ->join('categories', 'clips.category_id', '=', 'categories.id')
             ->orderBy('clips.updated_at', 'DESC')
             ->get();
     }
@@ -42,6 +44,8 @@ class Clip extends Model
     {
         return DB::table('clips')
             ->join('users', 'clips.user_id', '=', 'users.id')
+            ->join('sites', 'clips.site_id', '=', 'sites.id')
+            ->join('categories', 'clips.category_id', '=', 'categories.id')
             ->where('user_id', $id)
             ->orderBy('clips.updated_at', 'DESC')
             ->get();
@@ -52,8 +56,13 @@ class Clip extends Model
         return $this->belongsTo('App\Models\User');
     }
 
-    public function clip()
+    public function site()
     {
-        return $this->belongsTo('App\Models\Clip');
+        return $this->belongsTo('App\Models\Site');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category');
     }
 }

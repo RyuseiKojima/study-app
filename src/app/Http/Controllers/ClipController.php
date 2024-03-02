@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Clip;
+use App\Models\Site;
+use App\Models\Category;
 use App\Http\Requests\ClipStoreRequest;
 use App\Http\Requests\ClipUpdateRequest;
 use Illuminate\Support\Facades\Auth;
@@ -30,10 +32,11 @@ class ClipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Site $sites, Category $categories)
     {
         $user = Auth::user();
-        return view('clips.create')->with(['user' => $user]);
+        $getSites = $sites->getSites();
+        return view('clips.create')->with(['user' => $user, 'sites' => $getSites, 'categories' => $categories]);
     }
 
     /**

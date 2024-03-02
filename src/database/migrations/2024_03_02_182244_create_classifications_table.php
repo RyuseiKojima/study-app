@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('clips', function (Blueprint $table) {
-            $table->foreignId('category_id')->constrained('categories')->nullable();
+        Schema::create('classifications', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->comment('区分名');
+            $table->timestamps();
         });
     }
 
@@ -25,9 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('clips', function (Blueprint $table) {
-            $table->dropForeign('clips_category_id_foreign');
-            $table->dropColumn('category_id');
-        });
+        Schema::dropIfExists('classifications');
     }
 };
