@@ -29,14 +29,18 @@ class Clip extends Model
         'memo',
     ];
 
-    public function getOrderBy()
+    public function getAllClips()
     {
+        // $posts = DB::with('tags')->get();
         return DB::table('clips')
+            ->categories()
             ->join('users', 'clips.user_id', '=', 'users.id')
             ->join('sites', 'clips.site_id', '=', 'sites.id')
             ->orderBy('clips.updated_at', 'DESC')
             ->get();
     }
+
+
 
     public function yourClips($id)
     {
@@ -60,6 +64,6 @@ class Clip extends Model
 
     public function categories()
     {
-        return $this->belongsToMany('App\Models\ClipCategory');
+        return $this->belongsToMany('App\Models\Category');
     }
 }

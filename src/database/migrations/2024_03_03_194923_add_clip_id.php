@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('clips', function (Blueprint $table) {
-            $table->string('memo')->nullable()->change();
+        Schema::table('category_clip', function (Blueprint $table) {
+            $table->foreignId('clip_id')->constrained('clips')->onDelete('cascade');
         });
     }
 
@@ -25,9 +25,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('clips', function (Blueprint $table) {
-            #nullを許可しないに変更
-            $table->string('memo')->nullable(false)->change();
+        Schema::table('category_clip', function (Blueprint $table) {
+            $table->dropForeign('category_clip_clip_id_foreign');
+            $table->dropColumn('clip_id');
         });
     }
 };

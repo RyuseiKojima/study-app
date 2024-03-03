@@ -7,7 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\Clip;
 use App\Models\Site;
 use App\Models\Category;
-use App\Models\ClipCategory;
+use App\Models\CategoryClip;
 use Illuminate\Http\Request;
 use App\Http\Requests\ClipStoreRequest;
 use App\Http\Requests\ClipUpdateRequest;
@@ -24,8 +24,10 @@ class ClipController extends Controller
     public function index(Clip $clips)
     {
         $user = Auth::user();
-        $allClips = $clips->getOrderBy();
+        $allClips = Clip::with('categories')->orderBy('clips.updated_at', 'DESC')->get();
         $yourClips = $clips->yourClips($user['id']);
+
+        // dd($allClips);
         return view('clips.index')->with(['allClips' => $allClips, 'yourClips' => $yourClips]);
     }
 
@@ -48,18 +50,21 @@ class ClipController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClipStoreRequest $request)
     {
         // clipを保存
         $clip = new Clip();
         $clip->fill($request->all());
         $clip->save();
 
-        $clipCategory = new ClipCategory();
-        $clipCategory->fill($request->all());
-        $clipCategory->save();
+        foreach ($request->category_id as $category_id) {
+            $categoryClip = new CategoryClip();
+            $categoryClip->category_id = $category_id;
+            $categoryClip->clip_id = $clip->id;
+            $categoryClip->save();
+        };
 
-        Clip::create($request->validated());
+
         return redirect()->route('clips.index')->with('message', 'クリップの作成が完了しました。');
     }
 

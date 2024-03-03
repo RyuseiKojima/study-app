@@ -29,6 +29,13 @@ class Category extends Model
             ->get();
     }
 
+    public function getCategoriesEachClip($clip)
+    {
+        return DB::table('categories')
+            ->join('clips', 'clips.user_id', '=', 'users.id')
+            ->get();
+    }
+
     public function classification()
     {
         return $this->belongsto('App\Models\Classification');
@@ -36,6 +43,6 @@ class Category extends Model
 
     public function clips()
     {
-        return $this->belongsToMany('App\Models\ClipCategory');
+        return $this->belongsToMany('App\Models\Clip');
     }
 }

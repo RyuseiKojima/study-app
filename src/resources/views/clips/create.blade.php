@@ -50,7 +50,6 @@
                         <div class="mt-4">
                             <x-input-label for="memo" :value="__('メモ')" />
                             <textarea id="memo" class="form-control mt-1 w-full" type="text" name="memo" :value="old('memo')" /></textarea>
-                            <x-input-error :messages="$errors->get('memo')" class="mt-2" />
                         </div>
                         <div class="flex items-center justify-end mt-4">
 

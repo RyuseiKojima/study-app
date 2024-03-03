@@ -19,7 +19,7 @@ return new class() extends Migration
             $table->string('url')->comment('URL');
             $table->string('site')->comment('サイト名');
             $table->string('category')->comment('カテゴリ');
-            $table->text('memo')->comment('メモ');
+            $table->text('memo')->nullable()->comment('メモ');
             $table->timestamps();
         });
     }

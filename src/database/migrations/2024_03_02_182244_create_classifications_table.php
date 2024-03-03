@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('classifications', function (Blueprint $table) {
             $table->id();
             $table->string('name')->comment('区分名');
-            $table->timestamps();
         });
     }
 

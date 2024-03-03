@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('clip_categories', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('clip_id')->constrained('clips');
-            $table->foreignId('category_id')->constrained('categories');
-            $table->timestamps();
+        Schema::table('category_clip', function (Blueprint $table) {
+            $table->dropForeign('category_clip_clip_id_foreign');
+            $table->dropColumn('clip_id');
         });
     }
 
@@ -28,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clip_categories');
+        Schema::table('category_clip', function (Blueprint $table) {
+            $table->foreignId('clip_id')->constrained('clips')->nullable();
+        });
     }
 };
