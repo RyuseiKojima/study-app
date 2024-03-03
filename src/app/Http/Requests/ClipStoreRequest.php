@@ -20,9 +20,9 @@ class ClipStoreRequest extends FormRequest
         return [
             'title' => ['required', 'max:255'],
             'url' => ['required'],
-            'site' => ['required'],
-            'category' => ['required'],
+            'site_id' => ['required'],
             'user_id' => ['required'],
+            'memo' => [],
         ];
     }
 }

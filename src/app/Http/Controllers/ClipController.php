@@ -7,6 +7,8 @@ namespace App\Http\Controllers;
 use App\Models\Clip;
 use App\Models\Site;
 use App\Models\Category;
+use App\Models\ClipCategory;
+use Illuminate\Http\Request;
 use App\Http\Requests\ClipStoreRequest;
 use App\Http\Requests\ClipUpdateRequest;
 use Illuminate\Support\Facades\Auth;
@@ -46,8 +48,17 @@ class ClipController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ClipStoreRequest $request)
+    public function store(Request $request)
     {
+        // clipを保存
+        $clip = new Clip();
+        $clip->fill($request->all());
+        $clip->save();
+
+        $clipCategory = new ClipCategory();
+        $clipCategory->fill($request->all());
+        $clipCategory->save();
+
         Clip::create($request->validated());
         return redirect()->route('clips.index')->with('message', 'クリップの作成が完了しました。');
     }

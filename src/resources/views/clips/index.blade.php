@@ -25,7 +25,6 @@
                             <tr>
                                 <th scope="col">タイトル</th>
                                 <th scope="col">サイト</th>
-                                <th scope="col">カテゴリ</th>
                                 <th>作成日時</th>
                                 <th>更新日時</th>
                                 <th scope="col"></th>
@@ -37,8 +36,7 @@
                                 <tr>
                                     <td><a href="{{ $clip->url }}" target="_blank"
                                             rel="noopener noreferrer">{{ $clip->title }}</a></td>
-                                    <td>{{ $clip->site }}</td>
-                                    <td>{{ $clip->category }}</td>
+                                    <td>{{ $clip->site_id }}</td>
                                     <td>{{ $clip->created_at }}</td>
                                     <td>{{ $clip->updated_at }}</td>
                                     <td>

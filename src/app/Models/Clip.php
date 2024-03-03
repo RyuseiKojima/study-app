@@ -24,8 +24,7 @@ class Clip extends Model
     protected $fillable = [
         'title',
         'url',
-        'site',
-        'category',
+        'site_id',
         'user_id',
         'memo',
     ];
@@ -35,7 +34,6 @@ class Clip extends Model
         return DB::table('clips')
             ->join('users', 'clips.user_id', '=', 'users.id')
             ->join('sites', 'clips.site_id', '=', 'sites.id')
-            ->join('categories', 'clips.category_id', '=', 'categories.id')
             ->orderBy('clips.updated_at', 'DESC')
             ->get();
     }
@@ -45,7 +43,6 @@ class Clip extends Model
         return DB::table('clips')
             ->join('users', 'clips.user_id', '=', 'users.id')
             ->join('sites', 'clips.site_id', '=', 'sites.id')
-            ->join('categories', 'clips.category_id', '=', 'categories.id')
             ->where('user_id', $id)
             ->orderBy('clips.updated_at', 'DESC')
             ->get();
@@ -61,8 +58,8 @@ class Clip extends Model
         return $this->belongsTo('App\Models\Site');
     }
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsToMany('App\Models\ClipCategory');
     }
 }
