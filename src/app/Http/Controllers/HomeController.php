@@ -24,8 +24,13 @@ class HomeController extends Controller
     public function index(Clip $clips)
     {
         $user = Auth::user();
-        $allClips = $clips->getOrderBy();
+        $allClips = Clip::with('site')
+            ->with('user')
+            ->with('categories')
+            ->orderBy('updated_at', 'DESC')
+            ->get();
         $yourClips = $clips->yourClips($user['id']);
-        return view('dashboard')->with(['allClips' => $allClips, 'yourClips' => $yourClips]);
+
+        return view('clips.index')->with(['allClips' => $allClips, 'yourClips' => $yourClips]);
     }
 }

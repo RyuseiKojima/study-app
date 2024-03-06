@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ClipStoreRequest;
 use App\Http\Requests\ClipUpdateRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 
 class ClipController extends Controller
@@ -24,10 +26,13 @@ class ClipController extends Controller
     public function index(Clip $clips)
     {
         $user = Auth::user();
-        $allClips = Clip::with('categories')->orderBy('clips.updated_at', 'DESC')->get();
+        $allClips = Clip::with('site')
+            ->with('user')
+            ->with('categories')
+            ->orderBy('updated_at', 'DESC')
+            ->get();
         $yourClips = $clips->yourClips($user['id']);
 
-        // dd($allClips);
         return view('clips.index')->with(['allClips' => $allClips, 'yourClips' => $yourClips]);
     }
 
@@ -36,12 +41,12 @@ class ClipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Site $sites, Category $categories)
+    public function create()
     {
         $user = Auth::user();
-        $getSites = $sites->getSites();
-        $getCategories = $categories->getCategories();
-        return view('clips.create')->with(['user' => $user, 'sites' => $getSites, 'categories' => $getCategories]);
+        $sites = Site::all();
+        $categories = Category::all();
+        return view('clips.create')->with(['user' => $user, 'sites' => $sites, 'categories' => $categories]);
     }
 
     /**
@@ -64,7 +69,6 @@ class ClipController extends Controller
             $categoryClip->save();
         };
 
-
         return redirect()->route('clips.index')->with('message', 'クリップの作成が完了しました。');
     }
 
@@ -85,10 +89,14 @@ class ClipController extends Controller
      * @param \App\Models\Clip $clip
      * @return \Illuminate\Http\Response
      */
-    public function edit(Clip $clip)
+    public function edit($id)
     {
+        $clip = Clip::with('categories')
+            ->find($id);
         $user = Auth::user();
-        return view('clips.edit')->with(['clip' => $clip, 'user' => $user]);
+        $sites = Site::all();
+        $categories = Category::all();
+        return view('clips.edit')->with(['clip' => $clip, 'user' => $user, 'sites' => $sites, 'categories' => $categories]);
     }
 
     /**
@@ -100,13 +108,19 @@ class ClipController extends Controller
      */
     public function update(ClipUpdateRequest $request, Clip $clip)
     {
+        dd($clip);
+        DB::beginTransaction();
+        // クリップテーブルをアップデート
         $clip->update([
             'title' => $request->title,
             'url' => $request->url,
-            'site' => $request->site,
-            'category' => $request->category,
+            'site_id' => $request->site_id,
             'memo' => $request->memo
         ]);
+        // 中間テーブルをアップデート
+        $clip->categories()->sync($request->category_id);
+
+        DB::commit();
 
         return redirect()->route('clips.index')->with('message', 'クリップの更新が完了しました。');
     }

@@ -37,7 +37,7 @@
                                 <tr>
                                     <td><a href="{{ $clip->url }}" target="_blank"
                                             rel="noopener noreferrer">{{ $clip->title }}</a></td>
-                                    <td>{{ $clip->site_id }}</td>
+                                    <td>{{ $clip->site->name }}</td>
                                     <td>
                                         @foreach ($clip->categories as $category)
                                             <div>{{ $category->name }}</div>
