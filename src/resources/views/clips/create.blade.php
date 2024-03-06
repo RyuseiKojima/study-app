@@ -37,12 +37,15 @@
                         </div>
                         <div class="mt-4">
                             <x-input-label for="category_id[]" :value="__('カテゴリ')" />
-                            @foreach ($categories as $category)
-                                <input type="checkbox" name="category_id[]" class="btn-check" id="{{ $category->id }}"
-                                    value="{{ $category->id }}">
-                                <label for="{{ $category->id }}" class="btn btn-outline-secondary mb-1">
-                                    {{ $category->name }}
-                                </label>
+                            @foreach ($classifications as $classification)
+                                <div>{{ $classification->name }}</div>
+                                @foreach ($classification->categories as $category)
+                                    <input type="checkbox" name="category_id[]" class="btn-check"
+                                        id="{{ $category->id }}" value="{{ $category->id }}">
+                                    <label for="{{ $category->id }}" class="btn btn-outline-secondary mb-1">
+                                        {{ $category->name }}
+                                    </label>
+                                @endforeach
                             @endforeach
                             <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
                         </div>

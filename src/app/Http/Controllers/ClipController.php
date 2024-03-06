@@ -7,7 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\Clip;
 use App\Models\Site;
 use App\Models\Category;
-use App\Models\CategoryClip;
+use App\Models\Classification;
 use App\Http\Requests\ClipStoreRequest;
 use App\Http\Requests\ClipUpdateRequest;
 use Illuminate\Support\Facades\Auth;
@@ -45,7 +45,9 @@ class ClipController extends Controller
         $user = Auth::user();
         $sites = Site::all();
         $categories = Category::all();
-        return view('clips.create')->with(['user' => $user, 'sites' => $sites, 'categories' => $categories]);
+        $classifications = Classification::with('categories')->get();
+        // dd($classifications);
+        return view('clips.create')->with(['user' => $user, 'sites' => $sites, 'classifications' => $classifications]);
     }
 
     /**
