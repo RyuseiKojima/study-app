@@ -8,7 +8,6 @@ use App\Models\Clip;
 use App\Models\Site;
 use App\Models\Category;
 use App\Models\CategoryClip;
-use Illuminate\Http\Request;
 use App\Http\Requests\ClipStoreRequest;
 use App\Http\Requests\ClipUpdateRequest;
 use Illuminate\Support\Facades\Auth;
@@ -57,17 +56,15 @@ class ClipController extends Controller
      */
     public function store(ClipStoreRequest $request)
     {
+        DB::beginTransaction();
         // clipを保存
         $clip = new Clip();
         $clip->fill($request->all());
         $clip->save();
 
-        foreach ($request->category_id as $category_id) {
-            $categoryClip = new CategoryClip();
-            $categoryClip->category_id = $category_id;
-            $categoryClip->clip_id = $clip->id;
-            $categoryClip->save();
-        };
+        // 中間テーブルへの登録
+        $clip->categories()->sync($request->category_id);
+        DB::commit();
 
         return redirect()->route('clips.index')->with('message', 'クリップの作成が完了しました。');
     }
