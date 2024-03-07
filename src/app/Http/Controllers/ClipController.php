@@ -99,8 +99,8 @@ class ClipController extends Controller
             ->find($id);
         $user = Auth::user();
         $sites = Site::all();
-        $categories = Category::all();
-        return view('clips.edit')->with(['clip' => $clip, 'user' => $user, 'sites' => $sites, 'categories' => $categories]);
+        $classifications = Classification::with('categories')->get();
+        return view('clips.edit')->with(['clip' => $clip, 'user' => $user, 'sites' => $sites, 'classifications' => $classifications]);
     }
 
     /**
@@ -112,7 +112,6 @@ class ClipController extends Controller
      */
     public function update(ClipUpdateRequest $request, Clip $clip)
     {
-        dd($clip);
         DB::beginTransaction();
         // クリップテーブルをアップデート
         $clip->update([

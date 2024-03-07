@@ -38,26 +38,17 @@
                         </div>
                         <div class="mt-4">
                             <x-input-label for="category_id[]" :value="__('カテゴリ')" />
-                            @foreach ($categories as $category)
-                                <input type="checkbox" name="category_id[]" class="btn-check" id="{{ $category->id }}"
-                                    value="{{ $category->id }}"
-                                    {{ in_array($category->id, array_column($clip->categories->toArray(), 'id')) ? 'checked' : '' }}
-                                    onclick="func()">
-                                <label for="{{ $category->id }}" class="btn btn-outline-secondary mb-1">
-                                    {{ $category->name }}
-                                </label>
-                                <script>
-                                    function func() {
-                                        const s = document.getElementById({{ $category->id }}).checked
-                                        console.log(s)
-
-                                        // if (myCheck.checked) {
-                                        //     myCheck.checked = false
-                                        // } else {
-                                        //     myCheck.checked = true
-                                        // }
-                                    }
-                                </script>
+                            @foreach ($classifications as $classification)
+                                <div>{{ $classification->name }}</div>
+                                @foreach ($classification->categories as $category)
+                                    <input type="checkbox" name="category_id[]" class="btn-check"
+                                        id="{{ $category->id }}" value="{{ $category->id }}"
+                                        {{ in_array($category->id, array_column($clip->categories->toArray(), 'id')) ? 'checked' : '' }}
+                                        onclick="func()">
+                                    <label for="{{ $category->id }}" class="btn btn-outline-secondary mb-1">
+                                        {{ $category->name }}
+                                    </label>
+                                @endforeach
                             @endforeach
                             <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
                         </div>
