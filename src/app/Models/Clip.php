@@ -29,19 +29,6 @@ class Clip extends Model
         'memo',
     ];
 
-    public function getAllClips()
-    {
-        // $posts = DB::with('tags')->get();
-        return DB::table('clips')
-            ->categories()
-            ->join('users', 'clips.user_id', '=', 'users.id')
-            ->join('sites', 'clips.site_id', '=', 'sites.id')
-            ->orderBy('clips.updated_at', 'DESC')
-            ->get();
-    }
-
-
-
     public function yourClips($id)
     {
         return DB::table('clips')

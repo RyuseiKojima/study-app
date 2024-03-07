@@ -13,8 +13,6 @@ use App\Http\Requests\ClipUpdateRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-
-
 class ClipController extends Controller
 {
     /**
@@ -25,12 +23,20 @@ class ClipController extends Controller
     public function index(Clip $clips)
     {
         $user = Auth::user();
-        $allClips = Clip::with('site')
+        $allClips = $clips
+            ->with('site')
             ->with('user')
             ->with('categories')
             ->orderBy('updated_at', 'DESC')
             ->get();
-        $yourClips = $clips->yourClips($user['id']);
+
+        $yourClips = $clips
+            ->with('site')
+            ->with('user')
+            ->with('categories')
+            ->where('clips.user_id', $user->id)
+            ->orderBy('updated_at', 'DESC')
+            ->get();
 
         return view('clips.index')->with(['allClips' => $allClips, 'yourClips' => $yourClips]);
     }
@@ -44,9 +50,8 @@ class ClipController extends Controller
     {
         $user = Auth::user();
         $sites = Site::all();
-        $categories = Category::all();
         $classifications = Classification::with('categories')->get();
-        // dd($classifications);
+
         return view('clips.create')->with(['user' => $user, 'sites' => $sites, 'classifications' => $classifications]);
     }
 
