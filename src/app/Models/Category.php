@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Category extends Model
 {
@@ -22,19 +21,6 @@ class Category extends Model
     protected $fillable = [
         'name',
     ];
-
-    public function getCategories()
-    {
-        return DB::table('categories')
-            ->get();
-    }
-
-    public function getCategoriesEachClip($clip)
-    {
-        return DB::table('categories')
-            ->join('clips', 'clips.user_id', '=', 'users.id')
-            ->get();
-    }
 
     public function classification()
     {

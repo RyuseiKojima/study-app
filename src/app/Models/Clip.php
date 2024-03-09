@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Clip extends Model
 {
@@ -28,16 +27,6 @@ class Clip extends Model
         'user_id',
         'memo',
     ];
-
-    public function yourClips($id)
-    {
-        return DB::table('clips')
-            ->join('users', 'clips.user_id', '=', 'users.id')
-            ->join('sites', 'clips.site_id', '=', 'sites.id')
-            ->where('user_id', $id)
-            ->orderBy('clips.updated_at', 'DESC')
-            ->get();
-    }
 
     public function user()
     {

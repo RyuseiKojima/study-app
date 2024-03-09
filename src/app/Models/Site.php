@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Site extends Model
 {
@@ -22,12 +21,6 @@ class Site extends Model
     protected $fillable = [
         'name',
     ];
-
-    public function getSites()
-    {
-        return DB::table('sites')
-            ->get();
-    }
 
     public function clips()
     {
