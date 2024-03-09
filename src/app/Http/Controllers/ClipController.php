@@ -6,12 +6,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Clip;
 use App\Models\Site;
-use App\Models\Category;
 use App\Models\Classification;
 use App\Http\Requests\ClipStoreRequest;
 use App\Http\Requests\ClipUpdateRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Library\BaseClass;
 
 class ClipController extends Controller
 {
@@ -23,20 +23,8 @@ class ClipController extends Controller
     public function index(Clip $clips)
     {
         $user = Auth::user();
-        $allClips = $clips
-            ->with('site')
-            ->with('user')
-            ->with('categories')
-            ->orderBy('updated_at', 'DESC')
-            ->get();
-
-        $yourClips = $clips
-            ->with('site')
-            ->with('user')
-            ->with('categories')
-            ->where('clips.user_id', $user->id)
-            ->orderBy('updated_at', 'DESC')
-            ->get();
+        $allClips = BaseClass::getAllClips($clips);
+        $yourClips = BaseClass::getyourClips($clips, $user);
 
         return view('clips.index')->with(['allClips' => $allClips, 'yourClips' => $yourClips]);
     }
