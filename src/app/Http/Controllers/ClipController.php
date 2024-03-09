@@ -11,7 +11,6 @@ use App\Http\Requests\ClipStoreRequest;
 use App\Http\Requests\ClipUpdateRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Library\BaseClass;
 
 class ClipController extends Controller
 {
@@ -23,8 +22,8 @@ class ClipController extends Controller
     public function index(Clip $clips)
     {
         $user = Auth::user();
-        $allClips = BaseClass::getAllClips($clips);
-        $yourClips = BaseClass::getyourClips($clips, $user);
+        $allClips = $clips->getAllClips();
+        $yourClips = $clips->getyourClips($user);
 
         return view('clips.index')->with(['allClips' => $allClips, 'yourClips' => $yourClips]);
     }
@@ -83,6 +82,7 @@ class ClipController extends Controller
      */
     public function edit($id)
     {
+
         $clip = Clip::with('categories')
             ->find($id);
         $user = Auth::user();
