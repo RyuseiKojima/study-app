@@ -27,9 +27,10 @@
                 </td>
                 <td>{{ $clip->updated_at }}</td>
                 <td>
+
                     {{-- ログイン中のユーザがいいねしているかどうかでボタンを変更 --}}
-                    @if ($clip->likes->toArray())
-                        <form action="{{ route('likes.destroy', ['clipId' => $clip->id]) }}" method="post">
+                    @if (in_array($clip->id, $getYourLikes))
+                        <form action="{{ route('likes.destroy', $clip->id) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">いいね</button>

@@ -57,29 +57,18 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Clip', 'likes');
     }
 
-    //この投稿に対して既にlikeしたかどうかを判別する
-    public function isLike($clipId)
+    public function getYourLikes($user)
     {
-        return $this->likes()->where('clip_id', $clipId)->exists();
-    }
-
-    //isLikeを使って、既にlikeしたか確認したあと、いいねする（重複させない）
-    public function like($clipId)
-    {
-        if ($this->isLike($clipId)) {
-            //もし既に「いいね」していたら何もしない
-        } else {
-            $this->likes()->attach($clipId);
+        // ログインユーザのいいね情報を取得
+        $likes =  $user->likes;
+        $getYourLikes = [];
+        // いいね情報からクリップIDを抽出し、配列に格納
+        foreach ($likes as $like) {
+            array_push($getYourLikes, $like->pivot->clip_id);
         }
-    }
 
-    //isLikeを使って、既にlikeしたか確認して、もししていたら解除する
-    public function unlike($clipId)
-    {
-        if ($this->isLike($clipId)) {
-            //もし既に「いいね」していたら消す
-            $this->likes()->detach($clipId);
-        } else {
-        }
+        // dd($likes);
+
+        return $getYourLikes;
     }
 }

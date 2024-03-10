@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Clip;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -20,13 +21,13 @@ class HomeController extends Controller
     }
 
 
-    public function index(Clip $clips)
+    public function index(Clip $clips, User $users)
     {
         $user = Auth::user();
         $allClips = $clips->getAllClips();
         $yourClips = $clips->getyourClips($user);
-        // dd($yourClips);
+        $getYourLikes = $users->getyourLikes($user);
 
-        return view('dashboard')->with(['allClips' => $allClips, 'yourClips' => $yourClips]);
+        return view('dashboard')->with(['allClips' => $allClips, 'yourClips' => $yourClips, 'getYourLikes' => $getYourLikes]);
     }
 }
