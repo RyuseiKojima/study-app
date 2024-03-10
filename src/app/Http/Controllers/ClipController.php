@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Clip;
 use App\Models\Site;
+use App\Models\User;
 use App\Models\Classification;
 use App\Http\Requests\ClipStoreRequest;
 use App\Http\Requests\ClipUpdateRequest;
@@ -19,13 +20,14 @@ class ClipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Clip $clips)
+    public function index(Clip $clips, User $users)
     {
         $user = Auth::user();
         $allClips = $clips->getAllClips();
         $yourClips = $clips->getyourClips($user);
+        $getYourLikes = $users->getyourLikes($user);
 
-        return view('clips.index')->with(['allClips' => $allClips, 'yourClips' => $yourClips]);
+        return view('clips.index')->with(['allClips' => $allClips, 'yourClips' => $yourClips, 'getYourLikes' => $getYourLikes]);
     }
 
     /**
@@ -55,7 +57,6 @@ class ClipController extends Controller
         $clip = new Clip();
         $clip->fill($request->all());
         $clip->save();
-
         // 中間テーブルへの登録
         $clip->categories()->sync($request->category_id);
         DB::commit();
@@ -109,7 +110,6 @@ class ClipController extends Controller
         ]);
         // 中間テーブルをアップデート
         $clip->categories()->sync($request->category_id);
-
         DB::commit();
 
         return redirect()->route('clips.index')->with('message', 'クリップの更新が完了しました。');

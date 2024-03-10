@@ -55,7 +55,7 @@ class Clip extends Model
             ->with('site')
             ->with('user')
             ->with('categories')
-            ->with('likes')
+            ->withCount('likes')
             ->orderBy('updated_at', 'DESC')
             ->get();
         return $allClips;
@@ -67,7 +67,7 @@ class Clip extends Model
             ->with('site')
             ->with('user')
             ->with('categories')
-            ->with('likes')
+            ->withCount('likes')
             ->where('clips.user_id', $user->id)
             ->orderBy('updated_at', 'DESC')
             ->get();
