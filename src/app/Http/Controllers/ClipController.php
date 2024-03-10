@@ -82,7 +82,6 @@ class ClipController extends Controller
      */
     public function edit($id)
     {
-
         $clip = Clip::with('categories')
             ->find($id);
         $user = Auth::user();

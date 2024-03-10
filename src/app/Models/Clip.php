@@ -28,29 +28,6 @@ class Clip extends Model
         'memo',
     ];
 
-    public function getAllClips()
-    {
-        $allClips = $this
-            ->with('site')
-            ->with('user')
-            ->with('categories')
-            ->orderBy('updated_at', 'DESC')
-            ->get();
-        return $allClips;
-    }
-
-    public function getYourClips($user)
-    {
-        $yourClips = $this
-            ->with('site')
-            ->with('user')
-            ->with('categories')
-            ->where('clips.user_id', $user->id)
-            ->orderBy('updated_at', 'DESC')
-            ->get();
-        return $yourClips;
-    }
-
     public function user()
     {
         return $this->belongsTo('App\Models\User');
@@ -68,6 +45,32 @@ class Clip extends Model
 
     public function likes()
     {
-        return $this->belongsToMany('App\Models\User');
+        return $this->belongsToMany('App\Models\User', 'likes');
+    }
+
+
+    public function getAllClips()
+    {
+        $allClips = $this
+            ->with('site')
+            ->with('user')
+            ->with('categories')
+            ->with('likes')
+            ->orderBy('updated_at', 'DESC')
+            ->get();
+        return $allClips;
+    }
+
+    public function getYourClips($user)
+    {
+        $yourClips = $this
+            ->with('site')
+            ->with('user')
+            ->with('categories')
+            ->with('likes')
+            ->where('clips.user_id', $user->id)
+            ->orderBy('updated_at', 'DESC')
+            ->get();
+        return $yourClips;
     }
 }

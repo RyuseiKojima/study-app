@@ -25,6 +25,7 @@ class HomeController extends Controller
         $user = Auth::user();
         $allClips = $clips->getAllClips();
         $yourClips = $clips->getyourClips($user);
+        // dd($yourClips);
 
         return view('dashboard')->with(['allClips' => $allClips, 'yourClips' => $yourClips]);
     }

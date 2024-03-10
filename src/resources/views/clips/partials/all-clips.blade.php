@@ -11,6 +11,7 @@
             <th>更新日時</th>
             <th scope="col"></th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,22 @@
                     @endforeach
                 </td>
                 <td>{{ $clip->updated_at }}</td>
+                <td>
+                    {{-- ログイン中のユーザがいいねしているかどうかでボタンを変更 --}}
+                    @if ($clip->likes->toArray())
+                        <form action="{{ route('likes.destroy', ['clipId' => $clip->id]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">いいね</button>
+                        </form>
+                    @else
+                        <form action="{{ route('likes.store', $clip->id) }}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn-sm">いいね</button>
+                        </form>
+                    @endif
+                    {{-- <button onclick="like({{ $clip->id }})">いいね</button> --}}
+                </td>
                 @if ($clip->user_id == Auth::user()->id)
                     <td>
                         <a href="{{ route('clips.edit', $clip->id) }}" class="btn btn-success btn-sm">更新</a>
