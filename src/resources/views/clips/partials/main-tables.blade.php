@@ -35,6 +35,6 @@
         </form>
     </td>
 @else
-    <td></td>
+    <td><a href="{{ route('clips.show', $clip->id) }}" class="btn btn-dark btn-sm">詳細</a></td>
     <td></td>
 @endif
