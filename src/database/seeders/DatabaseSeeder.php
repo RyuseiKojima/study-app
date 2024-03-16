@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             UserTableSeeder::class,
             SiteTableSeeder::class,
             ClassificationTableSeeder::class,
-            CategorytableSeeder::class,
+            CategoryTableSeeder::class,
         ]);
     }
 }
