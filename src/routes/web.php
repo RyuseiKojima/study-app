@@ -7,16 +7,17 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
 
-// 記事CRUD
-Route::resource('clips', ClipController::class);
-
-// いいねの作成と削除
-Route::post('/like/{clipId}', [LikeController::class, 'store'])->name('likes.store');
-Route::delete('/like/{clipId}', [LikeController::class, 'destroy'])->name('likes.destroy');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+
+    // 記事CRUD
+    Route::resource('clips', ClipController::class);
+
+    // いいねの作成と削除
+    Route::post('/like/{clipId}', [LikeController::class, 'store'])->name('likes.store');
+    Route::delete('/like/{clipId}', [LikeController::class, 'destroy'])->name('likes.destroy');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

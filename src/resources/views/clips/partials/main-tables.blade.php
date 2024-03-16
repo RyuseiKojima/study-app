@@ -23,18 +23,10 @@
         </form>
     @endif
 </td>
-@if ($clip->user_id == Auth::user()->id)
-    <td>
+<td>
+    @if ($clip->user_id == Auth::user()->id)
         <a href="{{ route('clips.edit', $clip->id) }}" class="btn btn-success btn-sm">更新</a>
-    </td>
-    <td>
-        <form action="{{ route('clips.destroy', $clip->id) }}" method="post">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger btn-sm">削除</button>
-        </form>
-    </td>
-@else
-    <td><a href="{{ route('clips.show', $clip->id) }}" class="btn btn-dark btn-sm">詳細</a></td>
-    <td></td>
-@endif
+    @else
+        <a href="{{ route('clips.show', $clip->id) }}" class="btn btn-dark btn-sm">詳細</a>
+    @endif
+</td>

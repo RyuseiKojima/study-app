@@ -10,7 +10,6 @@
             <th>更新日時</th>
             <th scope="col"></th>
             <th scope="col"></th>
-            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>

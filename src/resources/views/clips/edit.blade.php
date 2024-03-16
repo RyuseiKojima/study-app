@@ -61,10 +61,12 @@
                             <x-success-button class="ml-4">
                                 {{ __('編集') }}
                             </x-success-button>
+                            <x-danger-button class="ml-4">
+                                {{ __('削除') }}
+                            </x-danger-button>
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
