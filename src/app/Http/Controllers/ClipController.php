@@ -25,9 +25,10 @@ class ClipController extends Controller
         $user = Auth::user();
         $allClips = $clips->getAllClips();
         $yourClips = $clips->getyourClips($user);
+        $goodClips = $clips->getGoodClips($user);
         $getYourLikes = $users->getyourLikes($user);
 
-        return view('clips.index')->with(['allClips' => $allClips, 'yourClips' => $yourClips, 'getYourLikes' => $getYourLikes]);
+        return view('clips.index')->with(['allClips' => $allClips, 'yourClips' => $yourClips, 'goodClips' => $goodClips, 'getYourLikes' => $getYourLikes]);
     }
 
     /**

@@ -26,8 +26,9 @@ class HomeController extends Controller
         $user = Auth::user();
         $allClips = $clips->getAllClips();
         $yourClips = $clips->getyourClips($user);
+        $goodClips = $clips->getGoodClips($user);
         $getYourLikes = $users->getyourLikes($user);
 
-        return view('dashboard')->with(['allClips' => $allClips, 'yourClips' => $yourClips, 'getYourLikes' => $getYourLikes]);
+        return view('dashboard')->with(['allClips' => $allClips, 'yourClips' => $yourClips, 'goodClips' => $goodClips, 'getYourLikes' => $getYourLikes]);
     }
 }

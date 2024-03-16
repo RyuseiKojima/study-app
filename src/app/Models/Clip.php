@@ -73,4 +73,19 @@ class Clip extends Model
             ->get();
         return $yourClips;
     }
+
+    public function getGoodClips($user)
+    {
+        $goodClips = $this
+            ->with('site')
+            ->with('user')
+            ->with('categories')
+            ->withCount('likes')
+            ->whereHas('likes', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })
+            ->orderBy('updated_at', 'DESC')
+            ->get();
+        return $goodClips;
+    }
 }

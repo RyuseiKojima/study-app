@@ -16,6 +16,9 @@
                     <div>
                         @include('clips.partials.all-clips')
                     </div>
+                    <div>
+                        @include('clips.partials.good-clips')
+                    </div>
                 </div>
             </div>
         </div>
