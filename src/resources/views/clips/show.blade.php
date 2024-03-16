@@ -4,7 +4,6 @@
             {{ __('記事') }}
         </h2>
     </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -31,7 +30,6 @@
                                         href="#!">{{ $category->name }}</a>
                                 @endforeach
                             </div>
-
                         </header>
                         <!-- Post content-->
                         <section class="mb-5">
@@ -41,8 +39,5 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
 </x-app-layout>
