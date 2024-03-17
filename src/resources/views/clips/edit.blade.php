@@ -52,19 +52,16 @@
                             @endforeach
                             <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
                         </div>
-
                         <div class="mt-4">
                             <x-input-label for="memo" :value="__('メモ')" />
                             <textarea id="memo" class="form-control mt-1 w-full" type="text" name="memo" /> {{ $clip->memo }}</textarea>
                         </div>
-                        <div class="flex items-center justify-end mt-4">
-                            <x-success-button class="ml-4">
-                                {{ __('編集') }}
-                            </x-success-button>
-                            <x-danger-button class="ml-4">
-                                {{ __('削除') }}
-                            </x-danger-button>
-                        </div>
+                        <button type="submit" class="btn btn-success mt-1">編集</button>
+                    </form>
+                    <form action="{{ route('clips.destroy', $clip->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger mt-1">削除</button>
                     </form>
                 </div>
             </div>

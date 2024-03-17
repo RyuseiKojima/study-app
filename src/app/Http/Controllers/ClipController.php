@@ -62,7 +62,7 @@ class ClipController extends Controller
         $clip->categories()->sync($request->category_id);
         DB::commit();
 
-        return redirect()->route('clips.index')->with('message', 'クリップの作成が完了しました。');
+        return redirect()->route('home')->with('message', 'クリップの作成が完了しました。');
     }
 
     /**
@@ -113,7 +113,7 @@ class ClipController extends Controller
         $clip->categories()->sync($request->category_id);
         DB::commit();
 
-        return redirect()->route('clips.index')->with('message', 'クリップの更新が完了しました。');
+        return redirect()->route('home')->with('message', 'クリップの更新が完了しました。');
     }
 
     /**
@@ -125,6 +125,6 @@ class ClipController extends Controller
     public function destroy(Clip $clip)
     {
         $clip->delete();
-        return redirect()->route('clips.index')->with('message', 'クリップの削除が完了しました。');
+        return redirect()->route('home')->with('message', 'クリップの削除が完了しました。');
     }
 }
