@@ -27,8 +27,13 @@ class HomeController extends Controller
         $allClips = $clips->getAllClips();
         $yourClips = $clips->getyourClips($user);
         $goodClips = $clips->getGoodClips($user);
+        $followerClips = $clips->getFollowerClips($user);
         $getYourLikes = $users->getyourLikes($user);
+        $getYourFollows = $users->getYourFollows($user);
 
-        return view('dashboard')->with(['allClips' => $allClips, 'yourClips' => $yourClips, 'goodClips' => $goodClips, 'getYourLikes' => $getYourLikes]);
+        // dd($followerClips);
+
+
+        return view('dashboard')->with(['allClips' => $allClips, 'yourClips' => $yourClips, 'goodClips' => $goodClips, 'followerClips' => $followerClips, 'getYourLikes' => $getYourLikes, 'getYourFollows' => $getYourFollows]);
     }
 }

@@ -32,12 +32,12 @@
                             あなたの投稿
                         </a>
                     </li>
-                    {{-- <li class="nav-item" role="presentation">
-                            <a href="#campaign" class="nav-link text-secondary" id="campaign-tab" data-bs-toggle="tab"
-                                role="tab" aria-controls="campaign" aria-selected="false">
-                                フォロワーの投稿
-                            </a>
-                        </li> --}}
+                    <li class="nav-item" role="presentation">
+                        <a href="#follows" class="nav-link text-secondary" id="follows-tab" data-bs-toggle="tab"
+                            role="tab" aria-controls="follows" aria-selected="false">
+                            フォロワーの投稿
+                        </a>
+                    </li>
                     <li class="nav-item" role="presentation">
                         <a href="#good" class="nav-link text-secondary" id="good-tab" data-bs-toggle="tab"
                             role="tab" aria-controls="good" aria-selected="false">
@@ -53,9 +53,9 @@
                     <div class="tab-pane fade" id="your" role="tabpanel" aria-labelledby="your-tab">
                         @include('clips.partials.your-clips')
                     </div>
-                    {{-- <div class="tab-pane fade" id="campaign" role="tabpanel" aria-labelledby="campaign-tab">
-                            <!-- タブパネルの中身を書く -->
-                        </div> --}}
+                    <div class="tab-pane fade" id="follows" role="tabpanel" aria-labelledby="follows-tab">
+                        @include('clips.partials.follows-clips')
+                    </div>
                     <div class="tab-pane fade" id="good" role="tabpanel" aria-labelledby="good-tab">
                         @include('clips.partials.good-clips')
                     </div>

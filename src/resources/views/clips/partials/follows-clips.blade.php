@@ -1,5 +1,5 @@
 <h2 class="font-semibold text-xl text-gray-800 leading-tight mt-3">
-    いいねした投稿
+    すべての投稿
 </h2>
 <table class="table table-striped">
     <thead>
@@ -14,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($goodClips as $clip)
+        @foreach ($followerClips as $clip)
             <tr>
                 <td>
                     {{ $clip->user->name }}

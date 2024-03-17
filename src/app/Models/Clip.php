@@ -74,6 +74,23 @@ class Clip extends Model
         return $yourClips;
     }
 
+    public function getFollowerClips($user)
+    {
+        $followerClips = $this
+            ->with('site')
+            ->with('user')
+            ->whereIn('user_id', $user->follows()->pluck('followed_user_id'))
+            ->with('categories')
+            ->withCount('likes')
+            // ->with('relationships')
+
+            ->orderBy('updated_at', 'DESC')
+
+            ->get();
+        // dd($user->follows()->pluck('followed_user_id'));
+        return $followerClips;
+    }
+
     public function getGoodClips($user)
     {
         $goodClips = $this

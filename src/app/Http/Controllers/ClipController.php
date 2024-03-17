@@ -20,16 +20,19 @@ class ClipController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Clip $clips, User $users)
-    {
-        $user = Auth::user();
-        $allClips = $clips->getAllClips();
-        $yourClips = $clips->getyourClips($user);
-        $goodClips = $clips->getGoodClips($user);
-        $getYourLikes = $users->getyourLikes($user);
+    // public function index(Clip $clips, User $users)
+    // {
+    //     $user = Auth::user();
+    //     $allClips = $clips->getAllClips();
+    //     $yourClips = $clips->getyourClips($user);
+    //     $goodClips = $clips->getGoodClips($user);
+    //     $getYourLikes = $users->getyourLikes($user);
+    //     $getYourFollows = $users->getYourFollows($user);
 
-        return view('clips.index')->with(['allClips' => $allClips, 'yourClips' => $yourClips, 'goodClips' => $goodClips, 'getYourLikes' => $getYourLikes]);
-    }
+    //     dd($getYourFollows);
+
+    //     return view('clips.index')->with(['allClips' => $allClips, 'yourClips' => $yourClips, 'goodClips' => $goodClips, 'getYourLikes' => $getYourLikes, 'getYourFollows' => $getYourFollows]);
+    // }
 
     /**
      * Show the form for creating a new resource.

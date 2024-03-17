@@ -57,6 +57,18 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Clip', 'likes');
     }
 
+    // フォロワー→フォロー
+    public function followUsers()
+    {
+        return $this->belongsToMany('App\Models\User', 'relationships', 'followed_user_id', 'following_user_id');
+    }
+
+    // フォロー→フォロワー
+    public function follows()
+    {
+        return $this->belongsToMany('App\Models\User', 'relationships', 'following_user_id', 'followed_user_id');
+    }
+
     public function getYourLikes($user)
     {
         // ログインユーザのいいね情報を取得
@@ -70,5 +82,21 @@ class User extends Authenticatable
         // dd($likes);
 
         return $getYourLikes;
+    }
+
+    public function getYourFollows($user)
+    {
+        // dd($user);
+        // ログインユーザのいいね情報を取得
+        $follows =  $user->follows;
+        $getYourFollows = [];
+        // いいね情報からクリップIDを抽出し、配列に格納
+        foreach ($follows as $follow) {
+            array_push($getYourFollows, $follow->pivot->followed_user_id);
+        }
+
+        // dd($getYourFollows);
+
+        return $getYourFollows;
     }
 }

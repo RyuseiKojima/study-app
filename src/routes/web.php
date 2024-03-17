@@ -3,11 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ClipController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\RelationshipController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
-
-
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -18,6 +16,11 @@ Route::middleware('auth')->group(function () {
     // いいねの作成と削除
     Route::post('/like/{clipId}', [LikeController::class, 'store'])->name('likes.store');
     Route::delete('/like/{clipId}', [LikeController::class, 'destroy'])->name('likes.destroy');
+
+    // フォロー機能
+    Route::post('/users/{userId}', [RelationshipController::class, 'store'])->name('relationship.store');
+    Route::delete('/users/{userId}', [RelationshipController::class, 'destroy'])->name('relationship.destroy');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
