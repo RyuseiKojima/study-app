@@ -49,57 +49,70 @@ class Clip extends Model
     }
 
 
-    public function getAllClips()
+    // public function getAllClips()
+    // {
+    //     $allClips = $this
+    //         ->with('site')
+    //         ->with('user')
+    //         ->with('categories')
+    //         ->withCount('likes')
+    //         ->orderBy('updated_at', 'DESC')
+    //         ->get()
+    //         ->toArray();
+    //     return $allClips;
+    // }
+
+    public function getAllClipsBuilder()
     {
-        $allClips = $this
+        $allClipsBuilder = $this
             ->with('site')
             ->with('user')
             ->with('categories')
             ->withCount('likes')
-            ->orderBy('updated_at', 'DESC')
-            ->get();
-        return $allClips;
+            ->orderBy('updated_at', 'DESC');
+        return $allClipsBuilder;
     }
 
-    public function getYourClips($user)
-    {
-        $yourClips = $this
-            ->with('site')
-            ->with('user')
-            ->with('categories')
-            ->withCount('likes')
-            ->where('clips.user_id', $user->id)
-            ->orderBy('updated_at', 'DESC')
-            ->get();
-        return $yourClips;
-    }
+    // public function getYourClips($user)
+    // {
+    //     // getAllClips()を使用してdbの読み出し回数を減らす
+    //     $yourClips = $this
+    //         ->with('site')
+    //         ->with('user')
+    //         ->with('categories')
+    //         ->withCount('likes')
+    //         ->where('clips.user_id', $user->id)
+    //         ->orderBy('updated_at', 'DESC')
+    //         ->get();
+    //     return $yourClips;
+    // }
 
-    public function getFollowerClips($user)
-    {
-        $followerClips = $this
-            ->with('site')
-            ->with('user')
-            ->whereIn('user_id', $user->follows()->pluck('followed_user_id'))
-            ->with('categories')
-            ->withCount('likes')
-            ->orderBy('updated_at', 'DESC')
-            ->get();
-        // dd($user->follows()->pluck('followed_user_id'));
-        return $followerClips;
-    }
+    // public function getFollowerClips($user)
+    // {
+    //     $followerClips = $this
+    //         ->with('site')
+    //         ->with('user')
+    //         ->whereIn('user_id', $user->follows()->pluck('followed_user_id'))
+    //         ->with('categories')
+    //         ->withCount('likes')
+    //         ->orderBy('updated_at', 'DESC')
+    //         ->get();
+    //     // dd($user->follows()->pluck('followed_user_id'));
+    //     return $followerClips;
+    // }
 
-    public function getGoodClips($user)
-    {
-        $goodClips = $this
-            ->with('site')
-            ->with('user')
-            ->with('categories')
-            ->withCount('likes')
-            ->whereHas('likes', function ($query) use ($user) {
-                $query->where('user_id', $user->id);
-            })
-            ->orderBy('updated_at', 'DESC')
-            ->get();
-        return $goodClips;
-    }
+    // public function getGoodClips($user)
+    // {
+    //     $goodClips = $this
+    //         ->with('site')
+    //         ->with('user')
+    //         ->with('categories')
+    //         ->withCount('likes')
+    //         ->whereHas('likes', function ($query) use ($user) {
+    //             $query->where('user_id', $user->id);
+    //         })
+    //         ->orderBy('updated_at', 'DESC')
+    //         ->get();
+    //     return $goodClips;
+    // }
 }

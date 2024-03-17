@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Auth;
+
 
 class User extends Authenticatable
 {
@@ -69,10 +71,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\User', 'relationships', 'following_user_id', 'followed_user_id');
     }
 
-    public function getYourLikes($user)
+    public function getYourLikes()
     {
         // ログインユーザのいいね情報を取得
-        $likes =  $user->likes;
+        $likes =  Auth::user()->likes;
+
         $getYourLikes = [];
         // いいね情報からクリップIDを抽出し、配列に格納
         foreach ($likes as $like) {
@@ -82,10 +85,10 @@ class User extends Authenticatable
         return $getYourLikes;
     }
 
-    public function getYourFollows($user)
+    public function getYourFollows()
     {
         // ログインユーザがフォローしたアカウント情報を取得
-        $follows =  $user->follows;
+        $follows =  Auth::user()->follows;
         $getYourFollows = [];
         foreach ($follows as $follow) {
             array_push($getYourFollows, $follow->pivot->followed_user_id);
