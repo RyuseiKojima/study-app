@@ -31,9 +31,6 @@ class HomeController extends Controller
         $getYourLikes = $users->getyourLikes($user);
         $getYourFollows = $users->getYourFollows($user);
 
-        // dd($followerClips);
-
-
         return view('dashboard')->with(['allClips' => $allClips, 'yourClips' => $yourClips, 'goodClips' => $goodClips, 'followerClips' => $followerClips, 'getYourLikes' => $getYourLikes, 'getYourFollows' => $getYourFollows]);
     }
 }

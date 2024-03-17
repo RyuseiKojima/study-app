@@ -79,23 +79,17 @@ class User extends Authenticatable
             array_push($getYourLikes, $like->pivot->clip_id);
         }
 
-        // dd($likes);
-
         return $getYourLikes;
     }
 
     public function getYourFollows($user)
     {
-        // dd($user);
-        // ログインユーザのいいね情報を取得
+        // ログインユーザがフォローしたアカウント情報を取得
         $follows =  $user->follows;
         $getYourFollows = [];
-        // いいね情報からクリップIDを抽出し、配列に格納
         foreach ($follows as $follow) {
             array_push($getYourFollows, $follow->pivot->followed_user_id);
         }
-
-        // dd($getYourFollows);
 
         return $getYourFollows;
     }
