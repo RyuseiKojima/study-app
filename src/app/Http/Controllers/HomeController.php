@@ -24,6 +24,7 @@ class HomeController extends Controller
     public function index(Clip $clips, User $users)
     {
         $user_id = Auth::user()->id;
+        $user = Auth::user();
         $allClips = $clips
             ->getAllClipsBuilder()
             ->get();
@@ -39,8 +40,9 @@ class HomeController extends Controller
             ->get();
         $followerClips = $clips
             ->getAllClipsBuilder()
-            ->whereIn('user_id', $users->follows()->pluck('followed_user_id'))
+            ->whereIn('user_id', $users->getYourFollows())
             ->get();
+        // dd($users->follows());
         $getYourLikes = $users->getyourLikes();
         $getYourFollows = $users->getYourFollows();
 

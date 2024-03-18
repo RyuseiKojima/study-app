@@ -22,8 +22,6 @@ class RelationshipController extends Controller
         ]);
         $relationship->save();
         DB::commit();
-        // dd($relationship);
-
         return back()->withInput();
     }
 

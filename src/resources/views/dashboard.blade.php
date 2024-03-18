@@ -7,10 +7,7 @@
                         {{ session('message') }}
                     </div>
                 @endif
-                <div>
-                    <button class="btn btn-primary my-1"
-                        onclick="location.href='{{ route('clips.create') }}'">新規作成</button>
-                </div>
+
                 <!-- ナビアイテム定義部分 -->
                 <ul class="nav nav-tabs my-3" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
