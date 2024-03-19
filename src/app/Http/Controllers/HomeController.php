@@ -15,34 +15,24 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
 
     public function index(Clip $clips, User $users)
     {
-        $user_id = Auth::user()->id;
         $user = Auth::user();
-        $allClips = $clips
-            ->getAllClipsBuilder()
-            ->get();
-        $yourClips = $clips
-            ->getAllClipsBuilder()
-            ->where('clips.user_id', $user_id)
-            ->get();
+        $allClips = $clips->getAllClipsBuilder()->get();
+        $yourClips = $clips->getAllClipsBuilder()->where('clips.user_id', $user->id)->get();
         $goodClips = $clips
             ->getAllClipsBuilder()
-            ->whereHas('likes', function ($like) use ($user_id) {
-                $like->where('user_id', $user_id);
+            ->whereHas('likes', function ($like) use ($user) {
+                $like->where('user_id', $user->id);
             })
             ->get();
-        $followerClips = $clips
-            ->getAllClipsBuilder()
-            ->whereIn('user_id', $users->getYourFollows())
-            ->get();
-        // dd($users->follows());
+        $followerClips = $clips->getAllClipsBuilder()->whereIn('user_id', $users->getYourFollows())->get();
         $getYourLikes = $users->getyourLikes();
         $getYourFollows = $users->getYourFollows();
 

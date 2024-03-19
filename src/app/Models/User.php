@@ -60,7 +60,7 @@ class User extends Authenticatable
     }
 
     // フォロワー→フォロー
-    public function followUsers()
+    public function followed()
     {
         return $this->belongsToMany('App\Models\User', 'relationships', 'followed_user_id', 'following_user_id');
     }
