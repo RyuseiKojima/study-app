@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Clip;
 use App\Models\Site;
-use App\Models\User;
 use App\Models\Classification;
 use App\Http\Requests\ClipStoreRequest;
 use App\Http\Requests\ClipUpdateRequest;

@@ -96,4 +96,25 @@ class User extends Authenticatable
 
         return $getYourFollows;
     }
+
+    public function getUserdsBuilder()
+    {
+        $usersBuilder = $this
+            ->with('clips')
+            ->with('likes')
+            ->with('followed')
+            ->with('follows')
+            ->withCount('clips')
+            ->withCount('likes')
+            ->withCount('followed')
+            ->withCount('follows');
+
+        return $usersBuilder;
+    }
+
+    public function getUser($user_id)
+    {
+        $user = $this->getUserdsBuilder()->where('id', $user_id)->get();
+        return $user;
+    }
 }

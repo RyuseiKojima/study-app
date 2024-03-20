@@ -21,6 +21,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/users/{userId}', [RelationshipController::class, 'store'])->name('relationship.store');
     Route::delete('/users/{userId}', [RelationshipController::class, 'destroy'])->name('relationship.destroy');
 
+    // プロフィール機能
+    Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -28,26 +30,26 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-use App\Http\Controllers\Admin\ProfileController as ProfileOfAdminController;
+// use App\Http\Controllers\Admin\ProfileController as ProfileOfAdminController;
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->middleware(['auth:admin', 'verified'])->name('dashboard');
+// Route::prefix('admin')->name('admin.')->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('admin.dashboard');
+//     })->middleware(['auth:admin', 'verified'])->name('dashboard');
 
-    Route::middleware('auth:admin')->group(function () {
-        Route::get('/profile', [ProfileOfAdminController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileOfAdminController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileOfAdminController::class, 'destroy'])->name('profile.destroy');
-    });
+//     Route::middleware('auth:admin')->group(function () {
+//         Route::get('/profile', [ProfileOfAdminController::class, 'edit'])->name('profile.edit');
+//         Route::patch('/profile', [ProfileOfAdminController::class, 'update'])->name('profile.update');
+//         Route::delete('/profile', [ProfileOfAdminController::class, 'destroy'])->name('profile.destroy');
+//     });
 
-    require __DIR__ . '/admin.php';
-});
+//     require __DIR__ . '/admin.php';
+// });
 
-// Language Switcher Route 言語切替用ルート
-Route::get('language/{locale}', function ($locale) {
-    app()->setLocale($locale);
-    session()->put('locale', $locale);
+// // Language Switcher Route 言語切替用ルート
+// Route::get('language/{locale}', function ($locale) {
+//     app()->setLocale($locale);
+//     session()->put('locale', $locale);
 
-    return redirect()->back();
-});
+//     return redirect()->back();
+// });

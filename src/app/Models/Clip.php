@@ -83,33 +83,4 @@ class Clip extends Model
         $goodClips = $this->getClipsBuilder()->whereIn('id', $getYourLikes)->get();
         return $goodClips;
     }
-
-    // public function getFollowerClips($user)
-    // {
-    //     $followerClips = $this
-    //         ->with('site')
-    //         ->with('user')
-    //         ->whereIn('user_id', $user->follows()->pluck('followed_user_id'))
-    //         ->with('categories')
-    //         ->withCount('likes')
-    //         ->orderBy('updated_at', 'DESC')
-    //         ->get();
-    //     // dd($user->follows()->pluck('followed_user_id'));
-    //     return $followerClips;
-    // }
-
-    // public function getGoodClips($user)
-    // {
-    //     $goodClips = $this
-    //         ->with('site')
-    //         ->with('user')
-    //         ->with('categories')
-    //         ->withCount('likes')
-    //         ->whereHas('likes', function ($query) use ($user) {
-    //             $query->where('user_id', $user->id);
-    //         })
-    //         ->orderBy('updated_at', 'DESC')
-    //         ->get();
-    //     return $goodClips;
-    // }
 }

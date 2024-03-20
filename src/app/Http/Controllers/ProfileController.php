@@ -8,14 +8,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Clip;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
-    public function show(Request $request): View
+    public function show($id, Clip $clips, User $users): View
     {
-        return view('profile.show', [
-            'user' => $request->user(),
-        ]);
+        $user_id = Auth::user()->id;
+        $clipsBuilder = $clips->getClipsBuilder();
+
+        $getYourFollows = $users->getYourFollows();
+        $getYourLikes = $users->getyourLikes();
+        $getUser = $users->getUser($id);
+
+        $yourClips = $clips->getYourClips($id);
+        $followerClips = $clips->getFollowerClips($getYourFollows);
+        $goodClips = $clips->getGoodClips($getYourLikes);
+
+        return view('profile.show', compact(['id', 'getYourFollows', 'getYourLikes', 'yourClips', 'followerClips', 'goodClips']));
     }
 
     /**

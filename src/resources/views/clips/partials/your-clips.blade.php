@@ -1,5 +1,5 @@
 <h2 class="font-semibold text-xl text-gray-800 leading-tight mt-3">
-    あなたの投稿
+    ユーザの投稿
 </h2>
 <table class="table table-striped">
     <thead>

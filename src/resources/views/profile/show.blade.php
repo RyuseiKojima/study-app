@@ -2,6 +2,13 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900">
+                <div class="h3 text-center">{{ Auth::user()->name }}</div>
+                <div class="text-center">
+                    @if ($id == Auth::user()->id)
+                        <a href="{{ route('profile.edit') }}" class="btn btn-secondary btn-sm">プロフィール更新</a>
+                    @endif
+                </div>
+
                 @if (session('message'))
                     <div class="alert alert-success">
                         {{ session('message') }}
@@ -11,14 +18,7 @@
                 <!-- ナビアイテム定義部分 -->
                 <ul class="nav nav-tabs my-3" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <!-- ページを開いた時に表示されている部分に関してはclass="active"とaria-selected="true"が必要 -->
-                        <a href="#all" class="nav-link active text-secondary" id="all-tab" data-bs-toggle="tab"
-                            role="tab" aria-controls="all" aria-selected="true">
-                            すべての投稿 <!-- ここに書いたものがナビアイテムとして表示される -->
-                        </a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a href="#your" class="nav-link text-secondary" id="your-tab" data-bs-toggle="tab"
+                        <a href="#your" class="nav-link active text-secondary" id="your-tab" data-bs-toggle="tab"
                             role="tab" aria-controls="your" aria-selected="false">
                             ユーザの投稿
                         </a>
@@ -37,11 +37,7 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
-                        <!-- タブパネルの中身を書く -->
-                        @include('clips.partials.all-clips')
-                    </div>
-                    <div class="tab-pane fade" id="your" role="tabpanel" aria-labelledby="your-tab">
+                    <div class="tab-pane fade show active" id="your" role="tabpanel" aria-labelledby="your-tab">
                         @include('clips.partials.your-clips')
                     </div>
                     <div class="tab-pane fade" id="follows" role="tabpanel" aria-labelledby="follows-tab">

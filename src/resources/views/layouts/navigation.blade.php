@@ -26,7 +26,11 @@
                         </button>
                     </x-slot>
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')" class="text-decoration-none">
+                        {{-- <a href="{{ route('clips.show', $clip->id) }}" class="btn btn-dark btn-sm">詳細</a>
+
+                        <x-dropdown-link :href="route('profile.edit')" class="text-decoration-none"> --}}
+                        <x-dropdown-link :href="route('profile.show', Auth::user()->id)" class="text-decoration-none">
+
                             {{ __('Profile') }}
                         </x-dropdown-link>
                         <!-- Authentication -->
