@@ -15,27 +15,25 @@ class HomeController extends Controller
      *
      * @return void
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
 
     public function index(Clip $clips, User $users)
     {
-        $user = Auth::user();
-        $allClips = $clips->getAllClipsBuilder()->get();
-        $yourClips = $clips->getAllClipsBuilder()->where('clips.user_id', $user->id)->get();
-        $goodClips = $clips
-            ->getAllClipsBuilder()
-            ->whereHas('likes', function ($like) use ($user) {
-                $like->where('user_id', $user->id);
-            })
-            ->get();
-        $followerClips = $clips->getAllClipsBuilder()->whereIn('user_id', $users->getYourFollows())->get();
-        $getYourLikes = $users->getyourLikes();
-        $getYourFollows = $users->getYourFollows();
+        $user_id = Auth::user()->id;
+        $clipsBuilder = $clips->getClipsBuilder();
 
-        return view('dashboard', compact(['allClips', 'yourClips', 'goodClips', 'followerClips', 'getYourLikes', 'getYourFollows']));
+        $getYourFollows = $users->getYourFollows();
+        $getYourLikes = $users->getyourLikes();
+
+        $allClips = $clips->getAllClips();
+        $yourClips = $clips->getYourClips($user_id);
+        $followerClips = $clips->getFollowerClips($getYourFollows);
+        $goodClips = $clips->getGoodClips($getYourLikes);
+
+        return view('dashboard', compact(['getYourFollows', 'getYourLikes', 'allClips', 'yourClips', 'followerClips', 'goodClips']));
     }
 }

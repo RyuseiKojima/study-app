@@ -48,44 +48,41 @@ class Clip extends Model
         return $this->belongsToMany('App\Models\User', 'likes');
     }
 
-
-    // public function getAllClips()
-    // {
-    //     $allClips = $this
-    //         ->with('site')
-    //         ->with('user')
-    //         ->with('categories')
-    //         ->withCount('likes')
-    //         ->orderBy('updated_at', 'DESC')
-    //         ->get()
-    //         ->toArray();
-    //     return $allClips;
-    // }
-
-    public function getAllClipsBuilder()
+    public function getClipsBuilder()
     {
-        $allClipsBuilder = $this
+        $clipsBuilder = $this
             ->with('site')
             ->with('user')
             ->with('categories')
-            ->withCount('likes')
-            ->orderBy('updated_at', 'DESC');
-        return $allClipsBuilder;
+            ->with('likes')
+            ->withCount('likes');
+
+        return $clipsBuilder;
     }
 
-    // public function getYourClips($user)
-    // {
-    //     // getAllClips()を使用してdbの読み出し回数を減らす
-    //     $yourClips = $this
-    //         ->with('site')
-    //         ->with('user')
-    //         ->with('categories')
-    //         ->withCount('likes')
-    //         ->where('clips.user_id', $user->id)
-    //         ->orderBy('updated_at', 'DESC')
-    //         ->get();
-    //     return $yourClips;
-    // }
+    public function getAllClips()
+    {
+        $allClips = $this->getClipsBuilder()->get();
+        return $allClips;
+    }
+
+    public function getYourClips($user_id)
+    {
+        $yourClips = $this->getClipsBuilder()->where('clips.user_id', $user_id)->get();
+        return $yourClips;
+    }
+
+    public function getFollowerClips($getYourFollows)
+    {
+        $followerClips = $this->getClipsBuilder()->whereIn('user_id', $getYourFollows)->get();
+        return $followerClips;
+    }
+
+    public function getGoodClips($getYourLikes)
+    {
+        $goodClips = $this->getClipsBuilder()->whereIn('id', $getYourLikes)->get();
+        return $goodClips;
+    }
 
     // public function getFollowerClips($user)
     // {
