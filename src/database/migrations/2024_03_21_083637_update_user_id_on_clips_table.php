@@ -14,7 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::table('clips', function (Blueprint $table) {
-            $table->foreignId('site_id')->constrained('sites')->nullable();
+            $table->dropForeign(['user_id']); //いったん外部キーを削除する。
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
         });
     }
 
@@ -26,8 +29,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('clips', function (Blueprint $table) {
-            // $table->dropForeign('clips_site_id_foreign');
-            // $table->dropColumn('site_id');
+            $table->dropForeign(['user_id']);
+            $table->foreign('user_id')
+                ->references('id')->on('users');
         });
     }
 };

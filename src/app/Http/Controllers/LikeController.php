@@ -29,12 +29,16 @@ class LikeController extends Controller
     public function destroy($clipId)
     {
         $user = Auth::user();
+        DB::beginTransaction();
+
         $like = Like::where([
             ['user_id', '=', $user->id],
             ['clip_id', '=', $clipId],
         ])
             ->first();
         $like->delete();
+        DB::commit();
+
         return back()->withInput();
     }
 }

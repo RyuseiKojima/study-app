@@ -14,8 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::table('category_clip', function (Blueprint $table) {
-            $table->dropForeign('category_clip_clip_id_foreign');
-            $table->dropColumn('clip_id');
+            $table->dropForeign(['category_id']); //いったん外部キーを削除する。
+            $table->foreign('category_id')
+                ->references('id')->on('categories')
+                ->onDelete('cascade');
         });
     }
 
@@ -27,7 +29,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('category_clip', function (Blueprint $table) {
-            // $table->foreignId('clip_id')->constrained('clips')->nullable();
+            $table->dropForeign(['category_id']); //いったん外部キーを削除する。
+            $table->foreign('category_id')
+                ->references('id')->on('categories');
         });
     }
 };

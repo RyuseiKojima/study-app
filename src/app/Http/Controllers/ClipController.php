@@ -107,7 +107,10 @@ class ClipController extends Controller
      */
     public function destroy(Clip $clip)
     {
+        DB::beginTransaction();
         $clip->delete();
+        DB::commit();
+
         return redirect()->route('home')->with('message', 'クリップの削除が完了しました。');
     }
 }

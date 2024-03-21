@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Clip;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+
 
 class ProfileController extends Controller
 {
@@ -22,11 +24,12 @@ class ProfileController extends Controller
         $getYourLikes = $users->getyourLikes();
         $getUser = $users->getUser($id);
 
+
         $yourClips = $clips->getYourClips($id);
         $followerClips = $clips->getFollowerClips($getYourFollows);
         $goodClips = $clips->getGoodClips($getYourLikes);
 
-        return view('profile.show', compact(['id', 'getYourFollows', 'getYourLikes', 'yourClips', 'followerClips', 'goodClips']));
+        return view('profile.show', compact(['id', 'getYourFollows', 'getYourLikes', 'getUser', 'yourClips', 'followerClips', 'goodClips']));
     }
 
     /**
@@ -44,6 +47,8 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        DB::beginTransaction();
+
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
@@ -51,6 +56,8 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
+        DB::commit();
+
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
@@ -60,6 +67,8 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        DB::beginTransaction();
+
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current-password'],
         ]);
@@ -72,6 +81,8 @@ class ProfileController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        DB::commit();
+
 
         return Redirect::to('/');
     }

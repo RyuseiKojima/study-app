@@ -7,7 +7,28 @@
                     @if ($id == Auth::user()->id)
                         <a href="{{ route('profile.edit') }}" class="btn btn-secondary btn-sm">プロフィール更新</a>
                     @endif
+                    @php
+                        // dd($getUser);
+                    @endphp
                 </div>
+
+                <table class="mt-3 table table-borderless w-25 m-auto text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col-1">投稿</th>
+                            <th scope="col-1">フォロー</th>
+                            <th scope="col-1">フォロワー</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="{{ route('profile.show', $getUser->id) }}">{{ $getUser->clips_count }}</a>
+                            </td>
+                            <td><a href="">{{ $getUser->follows_count }}</a></td>
+                            <td><a href="">{{ $getUser->followed_count }}</a></td>
+                        </tr>
+                    </tbody>
+                </table>
 
                 @if (session('message'))
                     <div class="alert alert-success">

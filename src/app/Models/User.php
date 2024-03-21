@@ -114,7 +114,7 @@ class User extends Authenticatable
 
     public function getUser($user_id)
     {
-        $user = $this->getUserdsBuilder()->where('id', $user_id)->get();
+        $user = $this->getUserdsBuilder()->where('id', $user_id)->first();
         return $user;
     }
 }

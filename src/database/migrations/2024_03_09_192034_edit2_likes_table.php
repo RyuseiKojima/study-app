@@ -29,8 +29,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('likes', function (Blueprint $table) {
-            $table->foreignId('clip_id')->constrained('clips');
-            $table->foreignId('g_user_id')->constrained('users');
+            // $table->foreignId('clip_id')->constrained('clips');
+            // $table->foreignId('g_user_id')->constrained('users');
         });
     }
 };
