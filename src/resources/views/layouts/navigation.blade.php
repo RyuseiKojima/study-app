@@ -6,7 +6,7 @@
                 <!-- Navigation Links -->
                 <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex ">
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')" class="text-decoration-none">
-                        {{ __('Track Share') }}
+                        {{ __('Tech Sharing') }}
                     </x-nav-link>
                 </div>
             </div>
