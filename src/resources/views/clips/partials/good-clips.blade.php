@@ -17,7 +17,8 @@
         @foreach ($goodClips as $clip)
             <tr>
                 <td>
-                    {{ $clip->user->name }}
+                    <a class="link-offset-2 link-underline link-underline-opacity-0 text-dark"
+                        href="{{ route('profile.show', $clip->user->id) }}">{{ $clip->user->name }}</a>
                     @if (Auth::user()->id == $clip->user->id)
                         {{-- ログイン中のユーザがフォローしているかどうかでボタンを変更 --}}
                     @elseif (in_array($clip->user->id, $getYourFollows))
