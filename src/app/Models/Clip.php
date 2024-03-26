@@ -55,7 +55,8 @@ class Clip extends Model
             ->with('user')
             ->with('categories')
             ->with('likes')
-            ->withCount('likes');
+            ->withCount('likes')
+            ->orderBy('updated_at', 'desc');
 
         return $clipsBuilder;
     }

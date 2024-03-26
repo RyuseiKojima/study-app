@@ -17,11 +17,13 @@ class ProfileController extends Controller
 {
     public function show($id, Clip $clips, User $users): View
     {
-        $user_id = Auth::user()->id;
-        $clipsBuilder = $clips->getClipsBuilder();
+        // $user_id = Auth::user()->id;
 
-        $getYourFollows = $users->getYourFollows();
-        $getYourLikes = $users->getyourLikes();
+        // $clipsBuilder = $clips->getClipsBuilder();
+
+        // dd($id);
+        $getYourFollows = $users->getYourFollows($id);
+        $getYourLikes = $users->getyourLikes($id);
         $getUser = $users->getUser($id);
 
 

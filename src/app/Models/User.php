@@ -71,10 +71,12 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\User', 'relationships', 'following_user_id', 'followed_user_id');
     }
 
-    public function getYourLikes()
+    public function getYourLikes($id)
     {
         // ログインユーザのいいね情報を取得
-        $likes =  Auth::user()->likes;
+        $likes =  $this::find($id)->likes;
+
+        // dd($likes);
 
         $getYourLikes = [];
         // いいね情報からクリップIDを抽出し、配列に格納
@@ -85,10 +87,10 @@ class User extends Authenticatable
         return $getYourLikes;
     }
 
-    public function getYourFollows()
+    public function getYourFollows($id)
     {
         // ログインユーザがフォローしたアカウント情報を取得
-        $follows =  Auth::user()->follows;
+        $follows =  $this::find($id)->follows;
         $getYourFollows = [];
         foreach ($follows as $follow) {
             array_push($getYourFollows, $follow->pivot->followed_user_id);

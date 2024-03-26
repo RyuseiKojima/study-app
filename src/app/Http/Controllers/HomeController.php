@@ -26,8 +26,8 @@ class HomeController extends Controller
         $user_id = Auth::user()->id;
         $clipsBuilder = $clips->getClipsBuilder();
 
-        $getYourFollows = $users->getYourFollows();
-        $getYourLikes = $users->getyourLikes();
+        $getYourFollows = $users->getYourFollows($user_id);
+        $getYourLikes = $users->getyourLikes($user_id);
 
         $allClips = $clips->getAllClips();
         $yourClips = $clips->getYourClips($user_id);
