@@ -27,7 +27,7 @@ https://technoshared.com
 アプリ機能
 
 ○E-R図
-
+![study-app-er drawio](https://github.com/RyuseiKojima/study-app/assets/122793737/e67bc614-7b6b-4f77-b9da-5c50a2ae2658)
 
 ○実装済み機能
 ・クリップ作成（CRUD）
@@ -86,9 +86,7 @@ AWSでのデプロイを実施しました。
 ルータやサブネットなど、各要素の位置関係や役割を学びながら少しずつ設計を進め、最終的に以下の図の形に落ち着きました。
 特に時間がかかったのは、http通信のSSL化です。
 
-
-
-
+![study-app-net drawio](https://github.com/RyuseiKojima/study-app/assets/122793737/059f94ff-54b4-4091-af01-452559b3585e)
 
 ○2月下旬〜
 基本機能の拡充を継続中です。
