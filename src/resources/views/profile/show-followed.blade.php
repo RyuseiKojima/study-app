@@ -3,7 +3,7 @@
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900">
                 @include('profile.partials.show-profile-base')
-                @include('profile.partials.followed-clips')
+                @include('profile.partials.followed-users')
             </div>
         </div>
     </div>
