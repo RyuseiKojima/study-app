@@ -9,6 +9,7 @@
             <th scope="col">フォロー数</th>
             <th scope="col">フォロワー数</th>
             <th scope="col">いいね数</th>
+
         </tr>
     </thead>
     <tbody>
