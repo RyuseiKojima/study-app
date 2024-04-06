@@ -7,8 +7,8 @@
 </td>
 <td>{{ $clip->updated_at }}</td>
 <td>
-    {{-- ログイン中のユーザがいいねしているかどうかでボタンを変更 --}}
-    @if (in_array($clip->id, $getYourLikes))
+    {{-- ログイン中のユーザがいいねしているかどうか --}}
+    @if ($clips->is_liked_by_auth_user($clip->id))
         <form action="{{ route('likes.destroy', $clip->id) }}" method="post">
             @csrf
             @method('DELETE')
@@ -24,7 +24,8 @@
     @endif
 </td>
 <td>
-    @if ($clip->user_id == Auth::user()->id)
+    {{-- クリップがログインユーザのものかどうか --}}
+    @if ($clip->user_id == $auth_id)
         <a href="{{ route('clips.edit', $clip->id) }}" class="btn btn-success btn-sm">更新</a>
     @else
         <a href="{{ route('clips.show', $clip->id) }}" class="btn btn-dark btn-sm">詳細</a>

@@ -2,16 +2,12 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900">
-                <div class="h3 text-center">{{ $getUser->name }}</div>
+                <div class="h3 text-center">{{ $users->getUser($id)->name }}</div>
                 <div class="text-center">
-                    @if ($id == Auth::user()->id)
+                    @if ($id == $auth_id)
                         <a href="{{ route('profile.edit') }}" class="btn btn-secondary btn-sm">プロフィール更新</a>
                     @endif
-                    @php
-                        // dd($getUser);
-                    @endphp
                 </div>
-
                 <table class="mt-3 table table-borderless w-25 m-auto text-center">
                     <thead>
                         <tr>
@@ -22,10 +18,11 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><a href="{{ route('profile.show', $getUser->id) }}">{{ $getUser->clips_count }}</a>
+                            <td><a
+                                    href="{{ route('profile.show', $users->getUser($id)->id) }}">{{ $users->getUser($id)->clips_count }}</a>
                             </td>
-                            <td><a href="">{{ $getUser->follows_count }}</a></td>
-                            <td><a href="">{{ $getUser->followed_count }}</a></td>
+                            <td><a href="">{{ $users->getUser($id)->follows_count }}</a></td>
+                            <td><a href="">{{ $users->getUser($id)->followed_count }}</a></td>
                         </tr>
                     </tbody>
                 </table>

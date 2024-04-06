@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($yourClips as $clip)
+        @foreach ($clips->getYourClips($id) as $clip)
             <tr>
                 @include('clips.partials.main-tables')
             </tr>

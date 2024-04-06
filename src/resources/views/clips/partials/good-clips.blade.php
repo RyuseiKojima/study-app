@@ -14,14 +14,14 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($goodClips as $clip)
+        @foreach ($clips->getGoodClips($id) as $clip)
             <tr>
                 <td>
                     <a class="link-offset-2 link-underline link-underline-opacity-0 text-dark"
                         href="{{ route('profile.show', $clip->user->id) }}">{{ $clip->user->name }}</a>
-                    @if (Auth::user()->id == $clip->user->id)
+                    @if ($auth_id == $clip->user->id)
                         {{-- ログイン中のユーザがフォローしているかどうかでボタンを変更 --}}
-                    @elseif (in_array($clip->user->id, $getYourFollows))
+                    @elseif ($users->is_followed_by_auth_user($clip->user->id))
                         <form action="{{ route('relationship.destroy', $clip->user->id) }}" method="post"
                             class="inline-block ml-1">
                             @csrf

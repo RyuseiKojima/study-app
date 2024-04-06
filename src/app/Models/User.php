@@ -119,4 +119,11 @@ class User extends Authenticatable
         $user = $this->getUserdsBuilder()->where('id', $user_id)->first();
         return $user;
     }
+
+    // あるユーザがログイン中のユーザにフォローされているかどうかを確認
+    public function is_followed_by_auth_user($id)
+    {
+        $auth_id = Auth::id();
+        return in_array($id, $this->getYourFollows($auth_id));
+    }
 }

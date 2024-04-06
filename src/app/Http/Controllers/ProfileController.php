@@ -17,21 +17,9 @@ class ProfileController extends Controller
 {
     public function show($id, Clip $clips, User $users): View
     {
-        // $user_id = Auth::user()->id;
+        $auth_id = Auth::user()->id;
 
-        // $clipsBuilder = $clips->getClipsBuilder();
-
-        // dd($id);
-        $getYourFollows = $users->getYourFollows($id);
-        $getYourLikes = $users->getyourLikes($id);
-        $getUser = $users->getUser($id);
-
-
-        $yourClips = $clips->getYourClips($id);
-        $followerClips = $clips->getFollowerClips($getYourFollows);
-        $goodClips = $clips->getGoodClips($getYourLikes);
-
-        return view('profile.show', compact(['id', 'getYourFollows', 'getYourLikes', 'getUser', 'yourClips', 'followerClips', 'goodClips']));
+        return view('profile.show', compact(['clips', 'users', 'auth_id', 'id']));
     }
 
     /**

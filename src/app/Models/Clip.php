@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 
 class Clip extends Model
 {
@@ -67,21 +70,41 @@ class Clip extends Model
         return $allClips;
     }
 
-    public function getYourClips($user_id)
+    public function getYourClips($id)
     {
-        $yourClips = $this->getClipsBuilder()->where('clips.user_id', $user_id)->get();
+        $yourClips = $this->getClipsBuilder()->where('clips.user_id', $id)->get();
         return $yourClips;
     }
 
-    public function getFollowerClips($getYourFollows)
+    public function getFollowerClips($id)
     {
+        // ユーザモデルを呼び出し
+        $users = new User;
+        // フォローしているユーザidを配列で取得
+        $getYourFollows = $users->getYourFollows($id);
+        // フォローしているユーザのクリップ情報を取得
         $followerClips = $this->getClipsBuilder()->whereIn('user_id', $getYourFollows)->get();
         return $followerClips;
     }
 
-    public function getGoodClips($getYourLikes)
+    public function getGoodClips($id)
     {
+        // ユーザモデルを呼び出し
+        $users = new User;
+        // いいねしているクリップidを配列で取得
+        $getYourLikes = $users->getYourLikes($id);
         $goodClips = $this->getClipsBuilder()->whereIn('id', $getYourLikes)->get();
         return $goodClips;
+    }
+
+    // あるクリップがログイン中のユーザにいいねされているかどうかを確認
+    public function is_liked_by_auth_user($id)
+    {
+        $auth_id = Auth::id();
+        // ユーザモデルを呼び出し
+        $users = new User;
+        // いいねしているクリップidを配列で取得
+        $getYourLikes = $users->getYourLikes($auth_id);
+        return in_array($id, $getYourLikes);
     }
 }

@@ -23,17 +23,9 @@ class HomeController extends Controller
 
     public function index(Clip $clips, User $users)
     {
-        $user_id = Auth::user()->id;
-        $clipsBuilder = $clips->getClipsBuilder();
+        $auth_id = Auth::user()->id;
+        $id = $auth_id;
 
-        $getYourFollows = $users->getYourFollows($user_id);
-        $getYourLikes = $users->getyourLikes($user_id);
-
-        $allClips = $clips->getAllClips();
-        $yourClips = $clips->getYourClips($user_id);
-        $followerClips = $clips->getFollowerClips($getYourFollows);
-        $goodClips = $clips->getGoodClips($getYourLikes);
-
-        return view('dashboard', compact(['getYourFollows', 'getYourLikes', 'allClips', 'yourClips', 'followerClips', 'goodClips']));
+        return view('dashboard', compact(['clips', 'users', 'auth_id', 'id']));
     }
 }
