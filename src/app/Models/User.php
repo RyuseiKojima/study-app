@@ -76,30 +76,16 @@ class User extends Authenticatable
         // ログインユーザのいいね情報を取得
         $likes =  $this::find($id)->likes;
 
-        // dd($likes);
-
         $getYourLikes = [];
         // いいね情報からクリップIDを抽出し、配列に格納
         foreach ($likes as $like) {
             array_push($getYourLikes, $like->pivot->clip_id);
         }
-
         return $getYourLikes;
     }
 
-    public function getYourFollows($id)
-    {
-        // ログインユーザがフォローしたアカウント情報を取得
-        $follows =  $this::find($id)->follows;
-        $getYourFollows = [];
-        foreach ($follows as $follow) {
-            array_push($getYourFollows, $follow->pivot->followed_user_id);
-        }
 
-        return $getYourFollows;
-    }
-
-    public function getUserdsBuilder()
+    public function getUsersBuilder()
     {
         $usersBuilder = $this
             ->with('clips')
@@ -116,8 +102,27 @@ class User extends Authenticatable
 
     public function getUser($user_id)
     {
-        $user = $this->getUserdsBuilder()->where('id', $user_id)->first();
+        $user = $this->getUsersBuilder()->where('id', $user_id)->first();
         return $user;
+    }
+
+    public function getYourFollows($id)
+    {
+        // ログインユーザがフォローしたアカウント情報を取得
+        $follows =  $this::find($id)->follows;
+        $getYourFollows = [];
+        foreach ($follows as $follow) {
+            array_push($getYourFollows, $follow->pivot->followed_user_id);
+        }
+        return $getYourFollows;
+    }
+
+    // あるユーザがフォローしているユーザ情報を取得
+    public function getFollowsUsers($id)
+    {
+        $getYourFollows = $this->getYourFollows($id);
+        $followsUsers = $this->getUsersBuilder()->whereIn('id', $getYourFollows)->get();
+        return $followsUsers;
     }
 
     // あるユーザがログイン中のユーザにフォローされているかどうかを確認
@@ -125,5 +130,24 @@ class User extends Authenticatable
     {
         $auth_id = Auth::id();
         return in_array($id, $this->getYourFollows($auth_id));
+    }
+
+    // あるユーザをフォローしているユーザidを配列で取得
+    public function getYourFollowed($id)
+    {
+        $followed =  $this::find($id)->followed;
+        $getYourFollowed = [];
+        foreach ($followed as $follow) {
+            array_push($getYourFollowed, $follow->pivot->following_user_id);
+        }
+        return $getYourFollowed;
+    }
+
+    // あるユーザをフォローしているユーザ情報を取得
+    public function getFollowedUsers($id)
+    {
+        $getYourFollowed = $this->getYourFollowed($id);
+        $followedUsers = $this->getUsersBuilder()->whereIn('id', $getYourFollowed)->get();
+        return $followedUsers;
     }
 }

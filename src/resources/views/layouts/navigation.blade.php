@@ -6,6 +6,7 @@
                 <!-- Navigation Links -->
                 <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex ">
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')" class="text-decoration-none">
+                        <i class="fa-solid fa-computer me-1"></i>
                         {{ __('Tech Sharing') }}
                     </x-nav-link>
                 </div>
@@ -16,8 +17,6 @@
                     <button class="btn btn-primary my-1 mr-2"
                         onclick="location.href='{{ route('clips.create') }}'">新規作成</button>
                 </div>
-
-
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button

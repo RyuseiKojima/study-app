@@ -15,11 +15,36 @@ use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
+    // あるユーザの投稿リストを表示
     public function show($id, Clip $clips, User $users): View
     {
         $auth_id = Auth::user()->id;
 
         return view('profile.show', compact(['clips', 'users', 'auth_id', 'id']));
+    }
+
+    // あるユーザのフォローリストを表示
+    public function showFollows($id, Clip $clips, User $users): View
+    {
+        $auth_id = Auth::user()->id;
+
+        return view('profile.show-follows', compact(['clips', 'users', 'auth_id', 'id']));
+    }
+
+    // あるユーザのフォロワーリストを表示
+    public function showFollowed($id, Clip $clips, User $users): View
+    {
+        $auth_id = Auth::user()->id;
+
+        return view('profile.show-followed', compact(['clips', 'users', 'auth_id', 'id']));
+    }
+
+    // あるユーザのいいねリストを表示
+    public function showGood($id, Clip $clips, User $users): View
+    {
+        $auth_id = Auth::user()->id;
+
+        return view('profile.show-good', compact(['clips', 'users', 'auth_id', 'id']));
     }
 
     /**

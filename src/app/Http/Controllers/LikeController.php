@@ -23,7 +23,7 @@ class LikeController extends Controller
         $like->save();
         DB::commit();
 
-        return back()->withInput();
+        return back()->withInput()->with('message', 'クリップをいいねしました。');
     }
 
     public function destroy($clipId)
@@ -39,6 +39,6 @@ class LikeController extends Controller
         $like->delete();
         DB::commit();
 
-        return back()->withInput();
+        return back()->withInput()->with('message', 'クリップのいいねを削除しました。');
     }
 }

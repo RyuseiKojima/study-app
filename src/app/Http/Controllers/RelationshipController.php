@@ -22,7 +22,7 @@ class RelationshipController extends Controller
         ]);
         $relationship->save();
         DB::commit();
-        return back()->withInput();
+        return back()->withInput()->with('message', 'ユーザをフォローしました。');
     }
 
     public function destroy($userId)
@@ -34,6 +34,6 @@ class RelationshipController extends Controller
         ])
             ->first();
         $like->delete();
-        return back()->withInput();
+        return back()->withInput()->with('message', 'ユーザのフォローを解除しました。');
     }
 }

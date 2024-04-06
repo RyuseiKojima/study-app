@@ -23,6 +23,9 @@ Route::middleware('auth')->group(function () {
 
     // プロフィール機能
     Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/{id}/follows', [ProfileController::class, 'showFollows'])->name('profile.show.follows');
+    Route::get('/profile/{id}/followed', [ProfileController::class, 'showFollowed'])->name('profile.show.followed');
+    Route::get('/profile/{id}/good', [ProfileController::class, 'showGood'])->name('profile.show.good');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
