@@ -18,9 +18,10 @@
             <tr>
                 {{-- ユーザ名前とフォローボタン --}}
                 <td>
-                    <a class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                        href="{{ route('profile.show', $user->id) }}">{{ $user->name }}</a>
-
+                    @include('components.dark-link', [
+                        'title' => $user->name,
+                        'route' => route('profile.show', $user->id),
+                    ])
                     @if ($auth_id == $user->id)
                         {{-- ログイン中のユーザがフォローしているかどうかでボタンを変更 --}}
                     @elseif ($users->is_followed_by_auth_user($user->id))
@@ -41,19 +42,28 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('profile.show', $user->id) }}">{{ $users->getUser($user->id)->clips_count }}</a>
+                    @include('components.dark-link', [
+                        'title' => $users->getUser($user->id)->clips_count,
+                        'route' => route('profile.show', $user->id),
+                    ])
                 </td>
                 <td>
-                    <a
-                        href="{{ route('profile.show.follows', $user->id) }}">{{ $users->getUser($user->id)->follows_count }}</a>
+                    @include('components.dark-link', [
+                        'title' => $users->getUser($user->id)->follows_count,
+                        'route' => route('profile.show.follows', $user->id),
+                    ])
                 </td>
                 <td>
-                    <a
-                        href="{{ route('profile.show.followed', $user->id) }}">{{ $users->getUser($user->id)->followed_count }}</a>
+                    @include('components.dark-link', [
+                        'title' => $users->getUser($user->id)->followed_count,
+                        'route' => route('profile.show.followed', $user->id),
+                    ])
                 </td>
                 <td>
-                    <a
-                        href="{{ route('profile.show.good', $user->id) }}">{{ $users->getUser($user->id)->likes_count }}</a>
+                    @include('components.dark-link', [
+                        'title' => $users->getUser($user->id)->likes_count,
+                        'route' => route('profile.show.good', $user->id),
+                    ])
                 </td>
             </tr>
         @endforeach

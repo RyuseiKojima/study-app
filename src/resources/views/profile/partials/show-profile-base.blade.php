@@ -1,3 +1,14 @@
+@include('components.dark-link', [
+    'title' => 'ホーム',
+    'route' => route('home'),
+])
+<br>
+@if ($id != $auth_id)
+    @include('components.dark-link', [
+        'title' => 'マイプロフィール',
+        'route' => route('profile.show.good', $auth_id),
+    ])
+@endif
 <div class="h3 text-center">{{ $users->getUser($id)->name }}</div>
 <div class="text-center">
     @if ($id == $auth_id)
@@ -26,11 +37,30 @@
     </thead>
     <tbody>
         <tr>
-            <td><a href="{{ route('profile.show', $id) }}">{{ $users->getUser($id)->clips_count }}</a>
+            <td>
+                @include('components.dark-link', [
+                    'title' => $users->getUser($id)->clips_count,
+                    'route' => route('profile.show', $id),
+                ])
             </td>
-            <td><a href="{{ route('profile.show.follows', $id) }}">{{ $users->getUser($id)->follows_count }}</a></td>
-            <td><a href="{{ route('profile.show.followed', $id) }}">{{ $users->getUser($id)->followed_count }}</a></td>
-            <td><a href="{{ route('profile.show.good', $id) }}">{{ $users->getUser($id)->likes_count }}</a></td>
+            <td>
+                @include('components.dark-link', [
+                    'title' => $users->getUser($id)->follows_count,
+                    'route' => route('profile.show.follows', $id),
+                ])
+            </td>
+            <td>
+                @include('components.dark-link', [
+                    'title' => $users->getUser($id)->followed_count,
+                    'route' => route('profile.show.followed', $id),
+                ])
+            </td>
+            <td>
+                @include('components.dark-link', [
+                    'title' => $users->getUser($id)->likes_count,
+                    'route' => route('profile.show.good', $id),
+                ])
+            </td>
         </tr>
     </tbody>
 </table>

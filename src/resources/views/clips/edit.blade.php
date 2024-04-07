@@ -57,7 +57,11 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger mt-1">削除</button>
                     </form>
+                    <button type="button"
+                        class="btn btn-link link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                        onClick="history.back()">戻る</button>
                 </div>
+
             </div>
         </div>
     </div>

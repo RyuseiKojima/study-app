@@ -3,6 +3,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    <div class="h3 mb-3">新規投稿</div>
                     <form method="POST" action="{{ route('clips.store') }}">
                         @csrf
                         <input type="hidden" name="user_id" value="{{ $user->id }}">
@@ -47,11 +48,18 @@
                             <x-input-label for="memo" :value="__('メモ')" />
                             <textarea id="memo" class="form-control mt-1 w-full" type="text" name="memo" :value="old('memo')" /></textarea>
                         </div>
-                        <div class="flex items-center justify-end mt-4">
-
-                            <x-primary-button class="ml-4">
-                                {{ __('新規作成') }}
-                            </x-primary-button>
+                        <div class="items-center justify-end mt-4">
+                            <div class="mb-2">
+                                <x-primary-button>
+                                    {{ __('新規作成') }}
+                                </x-primary-button>
+                            </div>
+                            <div>
+                                @include('components.dark-link', [
+                                    'title' => 'ホーム',
+                                    'route' => route('home'),
+                                ])
+                            </div>
                         </div>
                     </form>
                 </div>

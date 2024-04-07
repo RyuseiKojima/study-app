@@ -11,7 +11,7 @@
             <th scope="col">タイトル</th>
             <th scope="col">サイト</th>
             <th scope="col">カテゴリ</th>
-            <th>更新日時</th>
+            <th scope="col">更新日時</th>
             <th scope="col"></th>
             <th scope="col"></th>
         </tr>
@@ -20,8 +20,10 @@
         @foreach ($table as $clip)
             <tr>
                 <td>
-                    <a class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                        href="{{ route('profile.show', $clip->user->id) }}">{{ $clip->user->name }}</a>
+                    @include('components.dark-link', [
+                        'title' => $clip->user->name,
+                        'route' => route('profile.show', $clip->user->id),
+                    ])
                     @if ($auth_id == $clip->user->id)
                         {{-- ログイン中のユーザがフォローしているかどうかでボタンを変更 --}}
                     @elseif ($users->is_followed_by_auth_user($clip->user->id))
