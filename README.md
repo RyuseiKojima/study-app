@@ -108,7 +108,7 @@ AWSでのデプロイを実施しました。<br>
 主な実装内容は2の「実装済み機能」に示したものです。<br>
 
 ○第三者からのフィードバック<br>
-作成過程でTechTrainのメンターと複数回面談を実施し、以下のようなアドバイスを受けてリファクタリングなど施しました。<br>
+作成過程で現役エンジニアと定期的な面談を実施し、以下のアドバイスを受けてリファクタリングなど施しました。<br>
 ・Modelに同様の呼び出し処理が複数用意されており、データ数が増えた時に重くなることが懸念される(Clip)<br>
 →繰り返し使用する処理を切り分け(getClipsBuilder)、各条件ごとの関数に使用しました。<br>
 
@@ -116,10 +116,20 @@ AWSでのデプロイを実施しました。<br>
 
 ・Controllerをスリムにして可読性を向上すべき<br>
 →Modelの呼び出しと最低限の変数のみを記述する形に変えました。<br>
-変更前
+変更前<br>
 <img width="1019" alt="HomeController変更前" src="https://github.com/RyuseiKojima/study-app/assets/122793737/c2041d2f-3340-4038-9c76-ef2247911668">
-変更後
+変更後<br>
 <img width="553" alt="image" src="https://github.com/RyuseiKojima/study-app/assets/122793737/ccac11f9-8f53-48d3-a3aa-3eb935d4c434">
+
+・Viewで繰り返し書かれている要素が多く、管理が煩雑になる<br>
+→変数付きのincludeを使用し、編集すべきファイルを画一化しました。<br>
+変更前<br>
+全ての投稿、いいねした投稿など、項目ごとにファイルを作っていたため重複箇所が多かった<br>
+![image](https://github.com/RyuseiKojima/study-app/assets/122793737/1eb0886c-3c35-43f9-be49-d6093a5dd459)
+変更後<br>
+ベースのファイルを用意し、変数を当てる事で各条件の投稿一覧を表示できるように修正<br>
+<img width="861" alt="image" src="https://github.com/RyuseiKojima/study-app/assets/122793737/41710c7a-bb5a-465a-9fb9-191a36809e9d"><br>
+<img width="422" alt="image" src="https://github.com/RyuseiKojima/study-app/assets/122793737/b999c3b8-3dad-48da-bd75-918c9274c5d0">
 
 ○今後の予定<br>
 ・機能の拡張<br>

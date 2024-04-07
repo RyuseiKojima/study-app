@@ -24,6 +24,7 @@ class HomeController extends Controller
     public function index(Clip $clips, User $users)
     {
         $auth_id = Auth::user()->id;
+        // プロフィール画面用に用意した変数
         $id = $auth_id;
 
         return view('dashboard', compact(['clips', 'users', 'auth_id', 'id']));
