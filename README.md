@@ -29,7 +29,7 @@ https://technoshared.com
 
 2. アプリ機能
 
-○E-R図
+○E-R図<br>
 ![study-app-er drawio](https://github.com/RyuseiKojima/study-app/assets/122793737/e67bc614-7b6b-4f77-b9da-5c50a2ae2658)
 
 ○実装済み機能<br>

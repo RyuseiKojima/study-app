@@ -31,4 +31,40 @@ class Category extends Model
     {
         return $this->belongsToMany('App\Models\Clip');
     }
+
+    // 1つのカテゴリ情報を取得
+    public function getCategory($category_id)
+    {
+        $category = $this->where('id', $category_id)->first();
+        return $category;
+    }
+
+    // カテゴリに属するクリップidを配列で取得
+    public function getCategories($id)
+    {
+        // カテゴリのクリップ情報を取得
+        $clips =  $this::find($id)->clips;
+
+        $getCategories = [];
+        // いいね情報からクリップIDを抽出し、配列に格納
+        foreach ($clips as $clip) {
+            array_push($getCategories, $clip->pivot->clip_id);
+        }
+        return $getCategories;
+    }
+
+    public function getUsersBuilder()
+    {
+        $usersBuilder = $this
+            ->with('clips')
+            ->with('likes')
+            ->with('followed')
+            ->with('follows')
+            ->withCount('clips')
+            ->withCount('likes')
+            ->withCount('followed')
+            ->withCount('follows');
+
+        return $usersBuilder;
+    }
 }

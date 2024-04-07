@@ -7,6 +7,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Category;
 
 
 class Clip extends Model
@@ -97,6 +98,16 @@ class Clip extends Model
         return $goodClips;
     }
 
+    public function getCategoryClips($id)
+    {
+        // カテゴリモデルを呼び出し
+        $categories = new Category;
+        // カテゴリに属するクリップidを配列で取得
+        $getCategories = $categories->getCategories($id);
+        $categoryClips = $this->getClipsBuilder()->whereIn('id', $getCategories)->get();
+        return $categoryClips;
+    }
+
     // あるクリップがログイン中のユーザにいいねされているかどうかを確認
     public function is_liked_by_auth_user($id)
     {
@@ -107,4 +118,17 @@ class Clip extends Model
         $getYourLikes = $users->getYourLikes($auth_id);
         return in_array($id, $getYourLikes);
     }
+
+    // // あるカテゴリに属するクリップidを配列で取得
+    // public function getYourFollowed($id)
+    // {
+    //     // カテゴリモデルを呼び出し
+    //     $categories = new Category;
+    //     $followed =  $this::find($id)->followed;
+    //     $getYourFollowed = [];
+    //     foreach ($followed as $follow) {
+    //         array_push($getYourFollowed, $follow->pivot->following_user_id);
+    //     }
+    //     return $getYourFollowed;
+    // }
 }

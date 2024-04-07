@@ -47,7 +47,8 @@
                 <td>{{ $clip->site->name }}</td>
                 <td>
                     @foreach ($clip->categories as $category)
-                        <div>{{ $category->name }}</div>
+                        <a href="{{ route('category.show', $category->id) }}" class="btn btn-secondary btn-sm"
+                            style="--bs-btn-padding-y: .01rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">{{ $category->name }}</a>
                     @endforeach
                 </td>
                 <td>{{ $clip->updated_at }}</td>
