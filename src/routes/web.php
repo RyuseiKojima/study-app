@@ -6,6 +6,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\RelationshipController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
@@ -33,6 +34,9 @@ Route::middleware('auth')->group(function () {
 
     // カテゴリ機能
     Route::get('/category/{id}', [CategoryController::class, 'show'])->name('category.show');
+
+    // サイト機能
+    Route::get('/site/{id}', [SiteController::class, 'show'])->name('site.show');
 });
 
 require __DIR__ . '/auth.php';

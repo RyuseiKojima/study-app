@@ -44,7 +44,10 @@
                     @endif
                 </td>
                 <td><a href="{{ $clip->url }}" target="_blank" rel="noopener noreferrer">{{ $clip->title }}</a></td>
-                <td>{{ $clip->site->name }}</td>
+                <td>
+                    <a href="{{ route('site.show', $clip->site_id) }}" class="btn btn-secondary btn-sm"
+                        style="--bs-btn-padding-y: .01rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">{{ $clip->site->name }}</a>
+                </td>
                 <td>
                     @foreach ($clip->categories as $category)
                         <a href="{{ route('category.show', $category->id) }}" class="btn btn-secondary btn-sm"

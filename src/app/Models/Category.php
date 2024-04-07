@@ -52,19 +52,4 @@ class Category extends Model
         }
         return $getCategories;
     }
-
-    public function getUsersBuilder()
-    {
-        $usersBuilder = $this
-            ->with('clips')
-            ->with('likes')
-            ->with('followed')
-            ->with('follows')
-            ->withCount('clips')
-            ->withCount('likes')
-            ->withCount('followed')
-            ->withCount('follows');
-
-        return $usersBuilder;
-    }
 }

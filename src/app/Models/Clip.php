@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Site;
 
 
 class Clip extends Model
@@ -106,6 +107,16 @@ class Clip extends Model
         $getCategories = $categories->getCategories($id);
         $categoryClips = $this->getClipsBuilder()->whereIn('id', $getCategories)->get();
         return $categoryClips;
+    }
+
+    public function getSiteClips($id)
+    {
+        // サイトモデルを呼び出し
+        $sites = new Site;
+        // サイトに属するクリップidを配列で取得
+        $getSites = $sites->getSites($id);
+        $siteClips = $this->getClipsBuilder()->whereIn('id', $getSites)->get();
+        return $siteClips;
     }
 
     // あるクリップがログイン中のユーザにいいねされているかどうかを確認
