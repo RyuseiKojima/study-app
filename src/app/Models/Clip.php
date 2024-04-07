@@ -66,6 +66,13 @@ class Clip extends Model
         return $clipsBuilder;
     }
 
+    // 1つのカテゴリ情報を取得
+    public function getClip($id)
+    {
+        $clip = $this->getClipsBuilder()->where('id', $id)->first();
+        return $clip;
+    }
+
     public function getAllClips()
     {
         $allClips = $this->getClipsBuilder()->get();

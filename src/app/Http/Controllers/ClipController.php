@@ -56,6 +56,7 @@ class ClipController extends Controller
      */
     public function show(Clip $clip)
     {
+        // dd($clip);
         return view('clips.show', compact('clip'));
     }
 
