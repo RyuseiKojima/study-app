@@ -136,17 +136,4 @@ class Clip extends Model
         $getYourLikes = $users->getYourLikes($auth_id);
         return in_array($id, $getYourLikes);
     }
-
-    // // あるカテゴリに属するクリップidを配列で取得
-    // public function getYourFollowed($id)
-    // {
-    //     // カテゴリモデルを呼び出し
-    //     $categories = new Category;
-    //     $followed =  $this::find($id)->followed;
-    //     $getYourFollowed = [];
-    //     foreach ($followed as $follow) {
-    //         array_push($getYourFollowed, $follow->pivot->following_user_id);
-    //     }
-    //     return $getYourFollowed;
-    // }
 }

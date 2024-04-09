@@ -56,8 +56,12 @@ class ClipController extends Controller
      */
     public function show(Clip $clip)
     {
-        // dd($clip);
-        return view('clips.show', compact('clip'));
+
+        $clips = new Clip();
+        $like_count = $clip->likes->count();
+
+        $is_liked_by_auth_user = $clips->is_liked_by_auth_user($clip->id);
+        return view('clips.show')->with(['clip' => $clip, 'is_liked_by_auth_user' => $is_liked_by_auth_user, 'like_count' => $like_count]);
     }
 
     /**

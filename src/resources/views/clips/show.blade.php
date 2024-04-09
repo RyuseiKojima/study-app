@@ -3,7 +3,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-
+                    @if (session('message'))
+                        <div class="alert alert-success">
+                            {{ session('message') }}
+                        </div>
+                    @endif
                     <article>
                         <!-- Post header-->
                         <header class="mb-4">
@@ -20,21 +24,21 @@
                                 ])
                                 &emsp;更新日：{{ $clip->updated_at }}
                                 {{-- ログイン中のユーザがいいねしているかどうか --}}
-                                {{-- @if ($clips->is_liked_by_auth_user($id))
-                                    <form action="{{ route('likes.destroy', $id) }}" method="post">
+                                @if ($is_liked_by_auth_user)
+                                    <form action="{{ route('likes.destroy', $clip->id) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-danger btn btn-sm"><i
                                                 class="fa-solid fa-heart"></i>
-                                            {{ $clip->likes_count }}</button>
+                                            {{ $like_count }}</button>
                                     </form>
                                 @else
-                                    <form action="{{ route('likes.store', $id) }}" method="post">
+                                    <form action="{{ route('likes.store', $clip->id) }}" method="post">
                                         @csrf
                                         <button type="submit" class="btn btn-sm"><i class="fa-solid fa-heart"></i>
-                                            {{ $clip->likes_count }}</button>
+                                            {{ $like_count }}</button>
                                     </form>
-                                @endif --}}
+                                @endif
                             </div>
                             <div class="fst-italic">
                                 サイト
@@ -57,9 +61,12 @@
                                 <p class="fs-5">{{ $clip->memo }}</p>
                             </section>
                         @endif
-                        <button type="button"
-                            class="btn btn-link link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover px-0"
-                            onClick="history.back()">戻る</button>
+                        <div>
+                            @include('components.dark-link', [
+                                'title' => 'ホーム',
+                                'route' => route('home'),
+                            ])
+                        </div>
                     </article>
 
                 </div>
