@@ -17,6 +17,17 @@
                     <button class="btn btn-primary my-1 mr-2"
                         onclick="location.href='{{ route('clips.create') }}'">新規作成</button>
                 </div>
+                <!-- 検索機能ここから -->
+                <form class="form-inline flex" action="{{ route('clips.search') }}" method="POST">
+                    @csrf
+                    <div class="mr-2">
+                        <label for="keyword" class="sr-only">キーワード</label>
+                        <input type="text" class="form-control" id="keyword" name="keyword" placeholder="キーワード">
+                    </div>
+                    <div class="mr-2">
+                        <button type="submit" class="btn btn-secondary">検索</button>
+                    </div>
+                </form>
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button

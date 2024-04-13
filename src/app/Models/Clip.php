@@ -106,6 +106,25 @@ class Clip extends Model
         return $goodClips;
     }
 
+    public function getSearchClips($keyword)
+    {
+        $searchClips = $this->getClipsBuilder()
+            ->where('title', 'LIKE', "%{$keyword}%")
+            ->orwhere('memo', 'LIKE', "%{$keyword}%")
+            ->orwhereHas('site', function ($query) use ($keyword) {
+                $query->where('name', 'LIKE', "%{$keyword}%");
+            })
+            ->orwhereHas('user', function ($query) use ($keyword) {
+                $query->where('name', 'LIKE', "%{$keyword}%");
+            })
+            ->orwhereHas('categories', function ($query) use ($keyword) {
+                $query->where('name', 'LIKE', "%{$keyword}%");
+            })
+            ->get();
+
+        return $searchClips;
+    }
+
     public function getCategoryClips($id)
     {
         // カテゴリモデルを呼び出し

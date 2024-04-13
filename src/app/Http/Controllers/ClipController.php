@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Clip;
+use App\Models\User;
 use App\Models\Site;
 use App\Models\Classification;
+use Illuminate\Http\Request;
 use App\Http\Requests\ClipStoreRequest;
 use App\Http\Requests\ClipUpdateRequest;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +16,19 @@ use Illuminate\Support\Facades\DB;
 
 class ClipController extends Controller
 {
+
+    // あるキーワードの検索結果を表示
+    public function search(Request $request, Clip $clips, User $users)
+    {
+        /* キーワードから検索処理 */
+        $keyword = $request->input('keyword');
+        $auth_id = Auth::user()->id;
+        // プロフィール画面用に用意した変数
+        $id = $auth_id;
+
+        return view('clips.search', compact(['clips', 'users', 'auth_id', 'id', 'keyword']));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
