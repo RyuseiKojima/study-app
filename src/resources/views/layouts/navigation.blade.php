@@ -18,7 +18,7 @@
                         onclick="location.href='{{ route('clips.create') }}'">新規作成</button>
                 </div>
                 <!-- 検索機能ここから -->
-                <form class="form-inline flex" action="{{ route('clips.search') }}" method="POST">
+                <form class="form-inline flex" action="{{ route('search.post') }}" method="POST">
                     @csrf
                     <div class="mr-2">
                         <label for="keyword" class="sr-only">キーワード</label>

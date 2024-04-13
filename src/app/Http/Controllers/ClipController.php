@@ -18,10 +18,24 @@ class ClipController extends Controller
 {
 
     // あるキーワードの検索結果を表示
-    public function search(Request $request, Clip $clips, User $users)
+    public function searchPost(Request $request)
     {
         /* キーワードから検索処理 */
         $keyword = $request->input('keyword');
+
+        // 入力がなければホーム画面へ戻る
+        if (empty($keyword)) {
+            return redirect()->route('home');
+        } else {
+            return redirect()->route('search.get', $keyword);
+        }
+    }
+
+    // あるキーワードの検索結果を表示
+    public function searchGet($keyword, Clip $clips, User $users)
+    {
+        /* キーワードから検索処理 */
+        // $keyword = $request->input('keyword');
         $auth_id = Auth::user()->id;
         // プロフィール画面用に用意した変数
         $id = $auth_id;

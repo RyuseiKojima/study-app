@@ -14,7 +14,9 @@ Route::middleware('auth')->group(function () {
 
     // 記事CRUD
     Route::resource('clips', ClipController::class);
-    Route::post('/clips/search', [ClipController::class, 'search'])->name('clips.search');
+    Route::post('/clips/search', [ClipController::class, 'searchPost'])->name('search.post');
+    Route::get('/clips/search/{keyword}', [ClipController::class, 'searchGet'])->name('search.get');
+
 
     // いいねの作成と削除
     Route::post('/like/{clipId}', [LikeController::class, 'store'])->name('likes.store');
