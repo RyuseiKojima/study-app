@@ -22,6 +22,8 @@ class Category extends Model
         'name',
     ];
 
+    public $timestamps = false;
+
     public function classification()
     {
         return $this->belongsto('App\Models\Classification');
@@ -32,10 +34,20 @@ class Category extends Model
         return $this->belongsToMany('App\Models\Clip');
     }
 
+    public function getAllCategories()
+    {
+        $allCategories = $this
+            ->with('classification')
+            ->with('clips')
+            ->withCount('clips')
+            ->get();
+        return $allCategories;
+    }
+
     // 1つのカテゴリ情報を取得
     public function getCategory($category_id)
     {
-        $category = $this->where('id', $category_id)->first();
+        $category = $this->with('classification')->where('id', $category_id)->first();
         return $category;
     }
 

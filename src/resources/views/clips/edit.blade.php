@@ -24,7 +24,7 @@
                             <select id="site_id" class="form-select block mt-1 w-full" type="select" name="site_id"
                                 required />
                             @foreach ($sites as $site)
-                                <option value={{ $site->id }} {{ $site->id == $clip->site_id ? ':selected' : '' }}>
+                                <option value={{ $site->id }} {{ $site->id == $clip->site_id ? 'selected' : '' }}>
                                     {{ $site->name }}</option>
                             @endforeach
                             </select>

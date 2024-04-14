@@ -4,9 +4,9 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin/dashboard')">
-                        {{ __('Admin Dashboard') }}
+                <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')" class="text-decoration-none">
+                        {{ __('管理者ダッシュボード') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                         </button>
                     </x-slot>
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('admin.profile.edit')">
+                        <x-dropdown-link :href="route('admin.profile.show', Auth::user()->id)" class="text-decoration-none">
                             {{ __('Profile') }}
                         </x-dropdown-link>
                         <!-- Authentication -->
@@ -28,7 +28,8 @@
                             @csrf
                             <x-dropdown-link :href="route('admin.logout')"
                                 onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                                                this.closest('form').submit();"
+                                class="text-decoration-none">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>

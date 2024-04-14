@@ -26,4 +26,11 @@ class Classification extends Model
     {
         return $this->hasMany('App\Models\Category');
     }
+
+    public function getAllClassifications()
+    {
+        $allClassifications = $this
+            ->get();
+        return $allClassifications;
+    }
 }

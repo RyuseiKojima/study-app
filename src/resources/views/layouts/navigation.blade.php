@@ -28,6 +28,7 @@
                         <button type="submit" class="btn btn-secondary">検索</button>
                     </div>
                 </form>
+                <!-- 検索機能ここまで -->
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
@@ -37,7 +38,6 @@
                     </x-slot>
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.show', Auth::user()->id)" class="text-decoration-none">
-
                             {{ __('Profile') }}
                         </x-dropdown-link>
                         <!-- Authentication -->
