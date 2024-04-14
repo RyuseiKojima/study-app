@@ -8,6 +8,7 @@ use App\Models\Clip;
 use App\Models\Site;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Classification;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,26 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
+    public function create(Category $categories, Classification $classifications)
+    {
+        return view('admin.categories.create', compact('categories', 'classifications'));
+    }
+
+    public function store(CategoryStoreRequest $request)
+    {
+        DB::beginTransaction();
+        // dd($request->toArray());
+
+        $category = new Category();
+
+        $category->fill($request->all());
+        // dd($category);
+
+        $category->save();
+        DB::commit();
+
+        return redirect()->route('admin.dashboard')->with('message', 'カテゴリの作成が完了しました。');
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -57,8 +78,9 @@ class CategoryController extends Controller
      * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id, Category $categories)
     {
+        $category = $categories->getCategory($id);
         DB::beginTransaction();
         $category->delete();
         DB::commit();

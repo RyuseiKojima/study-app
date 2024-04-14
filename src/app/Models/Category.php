@@ -20,6 +20,7 @@ class Category extends Model
      */
     protected $fillable = [
         'name',
+        'classification_id',
     ];
 
     public $timestamps = false;

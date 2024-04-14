@@ -50,9 +50,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth:admin')->group(function () {
         Route::get('/dashboard', [HomeOfAdminController::class, 'index'])->name('dashboard');
 
-        Route::get('/admin/category/{id}', [CategoryOfAdminController::class, 'edit'])->name('category.edit');
-        Route::put('/admin/category/{id}', [CategoryOfAdminController::class, 'update'])->name('category.update');
-        Route::delete('/admin/category/{id}', [CategoryOfAdminController::class, 'destroy'])->name('category.destroy');
+        Route::get('/category/create', [CategoryOfAdminController::class, 'create'])->name('category.create');
+        Route::post('/category/store', [CategoryOfAdminController::class, 'store'])->name('category.store');
+        Route::get('/category/{id}', [CategoryOfAdminController::class, 'edit'])->name('category.edit');
+        Route::put('/category/{id}', [CategoryOfAdminController::class, 'update'])->name('category.update');
+        Route::delete('/category/{id}', [CategoryOfAdminController::class, 'destroy'])->name('category.destroy');
 
         Route::get('/profile/{id}', [ProfileOfAdminController::class, 'show'])->name('profile.show');
         Route::get('/profile', [ProfileOfAdminController::class, 'edit'])->name('profile.edit');
