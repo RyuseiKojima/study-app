@@ -12,7 +12,6 @@ use App\Models\Clip;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
-
 class ProfileController extends Controller
 {
     // あるユーザの投稿リストを表示

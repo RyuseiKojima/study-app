@@ -9,7 +9,7 @@
                 @endif
                 @include('components.dark-link', [
                     'title' => 'ホーム',
-                    'route' => route('home'),
+                    'route' => route('dashboard'),
                 ])
                 @include('clips.partials.site-clips')
             </div>

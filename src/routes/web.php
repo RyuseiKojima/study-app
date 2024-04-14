@@ -10,7 +10,7 @@ use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
     // 記事CRUD
     Route::resource('clips', ClipController::class);
@@ -44,23 +44,23 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-// use App\Http\Controllers\Admin\ProfileController as ProfileOfAdminController;
+use App\Http\Controllers\Admin\ProfileController as ProfileOfAdminController;
 
-// Route::prefix('admin')->name('admin.')->group(function () {
-//     Route::get('/dashboard', function () {
-//         return view('admin.dashboard');
-//     })->middleware(['auth:admin', 'verified'])->name('dashboard');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->middleware(['auth:admin', 'verified'])->name('dashboard');
 
-//     Route::middleware('auth:admin')->group(function () {
-//         Route::get('/profile', [ProfileOfAdminController::class, 'edit'])->name('profile.edit');
-//         Route::patch('/profile', [ProfileOfAdminController::class, 'update'])->name('profile.update');
-//         Route::delete('/profile', [ProfileOfAdminController::class, 'destroy'])->name('profile.destroy');
-//     });
+    Route::middleware('auth:admin')->group(function () {
+        Route::get('/profile', [ProfileOfAdminController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileOfAdminController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileOfAdminController::class, 'destroy'])->name('profile.destroy');
+    });
 
-//     require __DIR__ . '/admin.php';
-// });
+    require __DIR__ . '/admin.php';
+});
 
-// // Language Switcher Route 言語切替用ルート
+// Language Switcher Route 言語切替用ルート
 // Route::get('language/{locale}', function ($locale) {
 //     app()->setLocale($locale);
 //     session()->put('locale', $locale);

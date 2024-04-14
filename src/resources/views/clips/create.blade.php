@@ -57,7 +57,7 @@
                             <div>
                                 @include('components.dark-link', [
                                     'title' => 'ホーム',
-                                    'route' => route('home'),
+                                    'route' => route('dashboard'),
                                 ])
                             </div>
                         </div>

@@ -25,7 +25,7 @@ class ClipController extends Controller
 
         // 入力がなければホーム画面へ戻る
         if (empty($keyword)) {
-            return redirect()->route('home');
+            return redirect()->route('dashboard');
         } else {
             return redirect()->route('search.get', $keyword);
         }
@@ -74,7 +74,7 @@ class ClipController extends Controller
         $clip->categories()->sync($request->category_id);
         DB::commit();
 
-        return redirect()->route('home')->with('message', 'クリップの作成が完了しました。');
+        return redirect()->route('dashboard')->with('message', 'クリップの作成が完了しました。');
     }
 
     /**
@@ -130,7 +130,7 @@ class ClipController extends Controller
         $clip->categories()->sync($request->category_id);
         DB::commit();
 
-        return redirect()->route('home')->with('message', 'クリップの更新が完了しました。');
+        return redirect()->route('dashboard')->with('message', 'クリップの更新が完了しました。');
     }
 
     /**
@@ -145,6 +145,6 @@ class ClipController extends Controller
         $clip->delete();
         DB::commit();
 
-        return redirect()->route('home')->with('message', 'クリップの削除が完了しました。');
+        return redirect()->route('dashboard')->with('message', 'クリップの削除が完了しました。');
     }
 }

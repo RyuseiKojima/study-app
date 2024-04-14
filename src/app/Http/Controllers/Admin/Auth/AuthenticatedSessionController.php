@@ -26,11 +26,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-
+        //認証
         $request->authenticate();
-
+        //セッションを再生成
         $request->session()->regenerate();
-
+        //ログイン後の画面へリダイレクト
         return redirect()->intended(RouteServiceProvider::ADMIN_HOME);
     }
 
@@ -39,7 +39,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('admin')->logout();
+        Auth::guard('admins')->logout();
 
         $request->session()->invalidate();
 

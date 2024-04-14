@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Navigation Links -->
                 <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex ">
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')" class="text-decoration-none">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-decoration-none">
                         <i class="fa-solid fa-computer me-1"></i>
                         {{ __('Tech Sharing') }}
                     </x-nav-link>
