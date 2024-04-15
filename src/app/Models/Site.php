@@ -27,6 +27,14 @@ class Site extends Model
         return $this->hasMany('App\Models\Clip');
     }
 
+    public function getAllSites()
+    {
+        $allSites = $this
+            ->with('clips')
+            ->get();
+        return $allSites;
+    }
+
     // 1つのサイト情報を取得
     public function getSite($site_id)
     {

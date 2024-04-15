@@ -44,11 +44,16 @@ require __DIR__ . '/auth.php';
 
 use App\Http\Controllers\Admin\ProfileController as ProfileOfAdminController;
 use App\Http\Controllers\Admin\HomeController as HomeOfAdminController;
+use App\Http\Controllers\Admin\ClipController as ClipOfAdminController;
 use App\Http\Controllers\Admin\CategoryController as CategoryOfAdminController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth:admin')->group(function () {
         Route::get('/dashboard', [HomeOfAdminController::class, 'index'])->name('dashboard');
+
+        Route::get('/clip/{id}', [ClipOfAdminController::class, 'edit'])->name('clip.edit');
+        Route::put('/clip/{id}', [ClipOfAdminController::class, 'update'])->name('clip.update');
+        Route::delete('/clip/{id}', [ClipOfAdminController::class, 'destroy'])->name('clip.destroy');
 
         Route::get('/category/create', [CategoryOfAdminController::class, 'create'])->name('category.create');
         Route::post('/category/store', [CategoryOfAdminController::class, 'store'])->name('category.store');

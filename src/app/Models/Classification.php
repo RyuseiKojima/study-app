@@ -30,6 +30,7 @@ class Classification extends Model
     public function getAllClassifications()
     {
         $allClassifications = $this
+            ->with('categories')
             ->get();
         return $allClassifications;
     }
