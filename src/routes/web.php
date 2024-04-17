@@ -45,6 +45,7 @@ require __DIR__ . '/auth.php';
 use App\Http\Controllers\Admin\ProfileController as ProfileOfAdminController;
 use App\Http\Controllers\Admin\HomeController as HomeOfAdminController;
 use App\Http\Controllers\Admin\ClipController as ClipOfAdminController;
+use App\Http\Controllers\Admin\SiteController as SiteOfAdminController;
 use App\Http\Controllers\Admin\CategoryController as CategoryOfAdminController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -54,6 +55,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/clip/{id}', [ClipOfAdminController::class, 'edit'])->name('clip.edit');
         Route::put('/clip/{id}', [ClipOfAdminController::class, 'update'])->name('clip.update');
         Route::delete('/clip/{id}', [ClipOfAdminController::class, 'destroy'])->name('clip.destroy');
+
+        Route::get('/site/create', [SiteOfAdminController::class, 'create'])->name('site.create');
+        Route::post('/site/store', [SiteOfAdminController::class, 'store'])->name('site.store');
+        Route::get('/site/{id}', [SiteOfAdminController::class, 'edit'])->name('site.edit');
+        Route::put('/site/{id}', [SiteOfAdminController::class, 'update'])->name('site.update');
+        Route::delete('/site/{id}', [SiteOfAdminController::class, 'destroy'])->name('site.destroy');
 
         Route::get('/category/create', [CategoryOfAdminController::class, 'create'])->name('category.create');
         Route::post('/category/store', [CategoryOfAdminController::class, 'store'])->name('category.store');

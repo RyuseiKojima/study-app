@@ -94,7 +94,36 @@
                         {{-- @include('clips.partials.users-clips') --}}
                     </div>
                     <div class="tab-pane fade" id="sites" role="tabpanel" aria-labelledby="sites-tab">
-                        {{-- @include('clips.partials.sites-clips') --}}
+                        <h2 class="font-semibold text-xl text-gray-800 leading-tight mt-3">
+                            サイトリスト
+                        </h2>
+                        <div>
+                            <button class="btn btn-primary my-2"
+                                onclick="location.href='{{ route('admin.site.create') }}'">新規作成</button>
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">サイト名</th>
+                                    <th scope="col">クリップ数</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($sites->getAllSites() as $site)
+                                    <tr>
+                                        <td>{{ $site->id }}</td>
+                                        <td>{{ $site->name }}</td>
+                                        <td>{{ $site->clips_count }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.site.edit', $site->id) }}"
+                                                class="btn btn-success btn-sm">更新</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                     <div class="tab-pane fade" id="categories" role="tabpanel" aria-labelledby="categories-tab">
                         <h2 class="font-semibold text-xl text-gray-800 leading-tight mt-3">
@@ -110,6 +139,7 @@
                                     <th scope="col">id</th>
                                     <th scope="col">カテゴリ名</th>
                                     <th scope="col">区分</th>
+                                    <th scope="col">クリップ数</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -119,6 +149,7 @@
                                         <td>{{ $category->id }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->classification->name }}</td>
+                                        <td>{{ $category->clips_count }}</td>
                                         <td>
                                             <a href="{{ route('admin.category.edit', $category->id) }}"
                                                 class="btn btn-success btn-sm">更新</a>

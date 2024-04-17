@@ -22,6 +22,8 @@ class Site extends Model
         'name',
     ];
 
+    public $timestamps = false;
+
     public function clips()
     {
         return $this->hasMany('App\Models\Clip');
@@ -31,6 +33,7 @@ class Site extends Model
     {
         $allSites = $this
             ->with('clips')
+            ->withCount('clips')
             ->get();
         return $allSites;
     }
