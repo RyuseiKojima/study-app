@@ -3,6 +3,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    <div class="h3 mb-3">投稿編集</div>
                     <form method="POST" action="{{ route('admin.clip.update', $clip->id) }}">
                         @csrf
                         @method('PUT')

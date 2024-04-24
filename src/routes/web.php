@@ -47,6 +47,7 @@ use App\Http\Controllers\Admin\HomeController as HomeOfAdminController;
 use App\Http\Controllers\Admin\ClipController as ClipOfAdminController;
 use App\Http\Controllers\Admin\SiteController as SiteOfAdminController;
 use App\Http\Controllers\Admin\CategoryController as CategoryOfAdminController;
+use App\Http\Controllers\Admin\ClassificationController as ClassificationOfAdminController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth:admin')->group(function () {
@@ -67,6 +68,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/category/{id}', [CategoryOfAdminController::class, 'edit'])->name('category.edit');
         Route::put('/category/{id}', [CategoryOfAdminController::class, 'update'])->name('category.update');
         Route::delete('/category/{id}', [CategoryOfAdminController::class, 'destroy'])->name('category.destroy');
+
+        Route::get('/classification/create', [ClassificationOfAdminController::class, 'create'])->name('classification.create');
+        Route::post('/classification/store', [ClassificationOfAdminController::class, 'store'])->name('classification.store');
+        Route::get('/classification/{id}', [ClassificationOfAdminController::class, 'edit'])->name('classification.edit');
+        Route::put('/classification/{id}', [ClassificationOfAdminController::class, 'update'])->name('classification.update');
+        Route::delete('/classification/{id}', [ClassificationOfAdminController::class, 'destroy'])->name('classification.destroy');
 
         Route::get('/profile/{id}', [ProfileOfAdminController::class, 'show'])->name('profile.show');
         Route::get('/profile', [ProfileOfAdminController::class, 'edit'])->name('profile.edit');

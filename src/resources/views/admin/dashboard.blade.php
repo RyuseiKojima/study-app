@@ -161,7 +161,36 @@
                     </div>
                     <div class="tab-pane fade" id="classifications" role="tabpanel"
                         aria-labelledby="classifications-tab">
-                        {{-- @include('clips.partials.categories-clips') --}}
+                        <h2 class="font-semibold text-xl text-gray-800 leading-tight mt-3">
+                            区分リスト
+                        </h2>
+                        <div>
+                            <button class="btn btn-primary my-2"
+                                onclick="location.href='{{ route('admin.classification.create') }}'">新規作成</button>
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">区分名</th>
+                                    <th scope="col">カテゴリ数</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($classifications->getAllClassifications() as $classification)
+                                    <tr>
+                                        <td>{{ $classification->id }}</td>
+                                        <td>{{ $classification->name }}</td>
+                                        <td>{{ $classification->categories_count }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.classification.edit', $classification->id) }}"
+                                                class="btn btn-success btn-sm">更新</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

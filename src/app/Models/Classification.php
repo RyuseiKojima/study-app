@@ -22,6 +22,8 @@ class Classification extends Model
         'name',
     ];
 
+    public $timestamps = false;
+
     public function categories()
     {
         return $this->hasMany('App\Models\Category');
@@ -31,7 +33,19 @@ class Classification extends Model
     {
         $allClassifications = $this
             ->with('categories')
+            ->withCount('categories')
             ->get();
         return $allClassifications;
+    }
+
+    // 1つの区分情報を取得
+    public function getClassification($classification_id)
+    {
+        $classification = $this
+            ->where('id', $classification_id)
+            ->with('categories')
+            ->withCount('categories')
+            ->first();
+        return $classification;
     }
 }
