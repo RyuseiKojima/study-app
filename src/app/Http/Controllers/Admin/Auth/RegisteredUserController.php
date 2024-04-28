@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Admin\Controller;
 use App\Models\Admin;
-use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;

@@ -29,6 +29,7 @@ class Classification extends Model
         return $this->hasMany('App\Models\Category');
     }
 
+    // 全ての区分情報を取得
     public function getAllClassifications()
     {
         $allClassifications = $this

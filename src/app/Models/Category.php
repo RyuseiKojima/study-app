@@ -35,6 +35,7 @@ class Category extends Model
         return $this->belongsToMany('App\Models\Clip');
     }
 
+    // 全てのカテゴリ情報を取得
     public function getAllCategories()
     {
         $allCategories = $this

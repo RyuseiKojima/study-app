@@ -29,6 +29,7 @@ class Site extends Model
         return $this->hasMany('App\Models\Clip');
     }
 
+    // 全てのサイト情報を取得
     public function getAllSites()
     {
         $allSites = $this

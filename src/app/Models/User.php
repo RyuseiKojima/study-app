@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Auth;
-
 
 class User extends Authenticatable
 {
@@ -84,7 +82,6 @@ class User extends Authenticatable
         return $getYourLikes;
     }
 
-
     public function getUsersBuilder()
     {
         $usersBuilder = $this
@@ -100,6 +97,7 @@ class User extends Authenticatable
         return $usersBuilder;
     }
 
+    // 全てのユーザ情報を取得
     public function getAllUsers()
     {
         $allUsers = $this->getUsersBuilder()->get();
@@ -107,16 +105,16 @@ class User extends Authenticatable
         return $allUsers;
     }
 
-
+    // あるユーザ情報を取得
     public function getUser($user_id)
     {
         $user = $this->getUsersBuilder()->where('id', $user_id)->first();
         return $user;
     }
 
+    // ログインユーザがフォローしたアカウント情報を取得
     public function getYourFollows($id)
     {
-        // ログインユーザがフォローしたアカウント情報を取得
         $follows =  $this::find($id)->follows;
         $getYourFollows = [];
         foreach ($follows as $follow) {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
@@ -65,13 +67,13 @@ class ProfileController extends Controller
 
         $request->user()->fill($request->validated());
 
+        // アドレスが変更されているかどうか確認
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
 
         $request->user()->save();
         DB::commit();
-
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
@@ -96,7 +98,6 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         DB::commit();
-
 
         return Redirect::to('/');
     }

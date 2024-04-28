@@ -8,44 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-use App\Models\Clip;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
-    // あるユーザの投稿リストを表示
-    public function show($id, Clip $clips, User $users): View
-    {
-        $auth_id = $id;
-
-        return view('admin.profile.show', compact(['clips', 'users', 'auth_id', 'id']));
-    }
-
-    // あるユーザのフォローリストを表示
-    public function showFollows($id, Clip $clips, User $users): View
-    {
-        $auth_id = $id;
-
-        return view('admin.profile.show-follows', compact(['clips', 'users', 'auth_id', 'id']));
-    }
-
-    // あるユーザのフォロワーリストを表示
-    public function showFollowed($id, Clip $clips, User $users): View
-    {
-        $auth_id = $id;
-
-        return view('admin.profile.show-followed', compact(['clips', 'users', 'auth_id', 'id']));
-    }
-
-    // あるユーザのいいねリストを表示
-    public function showGood($id, Clip $clips, User $users): View
-    {
-        $auth_id = $id;
-
-        return view('admin.profile.show-good', compact(['clips', 'users', 'auth_id', 'id']));
-    }
-
     /**
      * Display the user's profile form.
      */
@@ -65,13 +31,13 @@ class ProfileController extends Controller
 
         $request->user()->fill($request->validated());
 
+        // アドレスが変更されているかどうか確認
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
 
         $request->user()->save();
         DB::commit();
-
 
         return Redirect::route('admin.profile.edit')->with('status', 'profile-updated');
     }
@@ -81,18 +47,21 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        DB::beginTransaction();
+
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current-password'],
         ]);
 
         $user = $request->user();
 
-        Auth::logout();
+        Auth::guard('admin')->logout();
 
         $user->delete();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        DB::commit();
 
         return Redirect::to('/admin/login');
     }

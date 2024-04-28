@@ -90,14 +90,11 @@
                             </tbody>
                         </table>
                     </div>
+                    {{-- ユーザ情報については閲覧のみ可 --}}
                     <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
                         <h2 class="font-semibold text-xl text-gray-800 leading-tight mt-3">
                             ユーザリスト
                         </h2>
-                        {{-- <div>
-                            <button class="btn btn-primary my-2"
-                                onclick="location.href='{{ route('admin.site.create') }}'">新規作成</button>
-                        </div> --}}
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -108,7 +105,6 @@
                                     <th scope="col">いいね数</th>
                                     <th scope="col">フォロー数</th>
                                     <th scope="col">フォロワー数</th>
-                                    {{-- <th scope="col"></th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -121,10 +117,6 @@
                                         <td>{{ $user->likes_count }}</td>
                                         <td>{{ $user->follows_count }}</td>
                                         <td>{{ $user->followed_count }}</td>
-                                        {{-- <td>
-                                            <a href="{{ route('admin.site.edit', $user->id) }}"
-                                                class="btn btn-success btn-sm">更新</a>
-                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>
