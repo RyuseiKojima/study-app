@@ -91,7 +91,44 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
-                        {{-- @include('clips.partials.users-clips') --}}
+                        <h2 class="font-semibold text-xl text-gray-800 leading-tight mt-3">
+                            ユーザリスト
+                        </h2>
+                        {{-- <div>
+                            <button class="btn btn-primary my-2"
+                                onclick="location.href='{{ route('admin.site.create') }}'">新規作成</button>
+                        </div> --}}
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">ユーザ名</th>
+                                    <th scope="col">メールアドレス</th>
+                                    <th scope="col">クリップ数</th>
+                                    <th scope="col">いいね数</th>
+                                    <th scope="col">フォロー数</th>
+                                    <th scope="col">フォロワー数</th>
+                                    {{-- <th scope="col"></th> --}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($users->getAllUsers() as $user)
+                                    <tr>
+                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->clips_count }}</td>
+                                        <td>{{ $user->likes_count }}</td>
+                                        <td>{{ $user->follows_count }}</td>
+                                        <td>{{ $user->followed_count }}</td>
+                                        {{-- <td>
+                                            <a href="{{ route('admin.site.edit', $user->id) }}"
+                                                class="btn btn-success btn-sm">更新</a>
+                                        </td> --}}
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                     <div class="tab-pane fade" id="sites" role="tabpanel" aria-labelledby="sites-tab">
                         <h2 class="font-semibold text-xl text-gray-800 leading-tight mt-3">

@@ -49,6 +49,7 @@ use App\Http\Controllers\Admin\SiteController as SiteOfAdminController;
 use App\Http\Controllers\Admin\CategoryController as CategoryOfAdminController;
 use App\Http\Controllers\Admin\ClassificationController as ClassificationOfAdminController;
 
+// 管理者画面
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth:admin')->group(function () {
         Route::get('/dashboard', [HomeOfAdminController::class, 'index'])->name('dashboard');
@@ -75,7 +76,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/classification/{id}', [ClassificationOfAdminController::class, 'update'])->name('classification.update');
         Route::delete('/classification/{id}', [ClassificationOfAdminController::class, 'destroy'])->name('classification.destroy');
 
-        Route::get('/profile/{id}', [ProfileOfAdminController::class, 'show'])->name('profile.show');
+        // Route::get('/profile/{id}', [ProfileOfAdminController::class, 'show'])->name('profile.show');
         Route::get('/profile', [ProfileOfAdminController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileOfAdminController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileOfAdminController::class, 'destroy'])->name('profile.destroy');

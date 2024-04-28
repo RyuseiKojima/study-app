@@ -1,7 +1,5 @@
 <?php
 
-// declare(strict_types=1);
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Controller;
@@ -36,8 +34,7 @@ class HomeController extends Controller
     {
         $auth_id = Auth::user()->id;
         // プロフィール画面用に用意した変数
-        $id = $auth_id;
 
-        return view('admin.dashboard', compact(['clips', 'users', 'sites', 'categories', 'classifications', 'auth_id', 'id']));
+        return view('admin.dashboard', compact(['clips', 'users', 'sites', 'categories', 'classifications', 'auth_id']));
     }
 }

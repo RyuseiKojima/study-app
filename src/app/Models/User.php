@@ -100,6 +100,14 @@ class User extends Authenticatable
         return $usersBuilder;
     }
 
+    public function getAllUsers()
+    {
+        $allUsers = $this->getUsersBuilder()->get();
+
+        return $allUsers;
+    }
+
+
     public function getUser($user_id)
     {
         $user = $this->getUsersBuilder()->where('id', $user_id)->first();

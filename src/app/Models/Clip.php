@@ -73,18 +73,21 @@ class Clip extends Model
         return $clip;
     }
 
+    // 全てのクリップ情報を取得
     public function getAllClips()
     {
         $allClips = $this->getClipsBuilder()->get();
         return $allClips;
     }
 
+    // あるユーザのクリップ情報を取得
     public function getYourClips($id)
     {
         $yourClips = $this->getClipsBuilder()->where('clips.user_id', $id)->get();
         return $yourClips;
     }
 
+    // フォローしているユーザのクリップ情報を取得
     public function getFollowerClips($id)
     {
         // ユーザモデルを呼び出し
@@ -96,6 +99,7 @@ class Clip extends Model
         return $followerClips;
     }
 
+    // いいねしているユーザのクリップ情報を取得
     public function getGoodClips($id)
     {
         // ユーザモデルを呼び出し
@@ -106,6 +110,7 @@ class Clip extends Model
         return $goodClips;
     }
 
+    // キーワード検索したクリップ情報を取得
     public function getSearchClips($keyword)
     {
         $searchClips = $this->getClipsBuilder()
@@ -125,6 +130,7 @@ class Clip extends Model
         return $searchClips;
     }
 
+    // あるカテゴリのクリップ情報を取得
     public function getCategoryClips($id)
     {
         // カテゴリモデルを呼び出し
@@ -135,6 +141,7 @@ class Clip extends Model
         return $categoryClips;
     }
 
+    // あるサイトのクリップ情報を取得
     public function getSiteClips($id)
     {
         // サイトモデルを呼び出し

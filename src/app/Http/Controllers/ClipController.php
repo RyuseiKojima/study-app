@@ -35,7 +35,6 @@ class ClipController extends Controller
     public function searchGet($keyword, Clip $clips, User $users)
     {
         /* キーワードから検索処理 */
-        // $keyword = $request->input('keyword');
         $auth_id = Auth::user()->id;
         // プロフィール画面用に用意した変数
         $id = $auth_id;

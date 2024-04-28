@@ -20,7 +20,7 @@
                         </button>
                     </x-slot>
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('admin.profile.show', Auth::user()->id)" class="text-decoration-none">
+                        <x-dropdown-link :href="route('admin.profile.edit', Auth::user()->id)" class="text-decoration-none">
                             {{ __('Profile') }}
                         </x-dropdown-link>
                         <!-- Authentication -->
