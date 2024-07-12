@@ -1,4 +1,4 @@
-最終更新日：2024/5/9
+最終更新日：2024/7/13
 
 1. アプリ概要
 
@@ -6,7 +6,8 @@
 Tech Sharing
 
 ○アプリリンク<br>
-https://technoshared.com
+**https://technoshared.com**
+→無料期間の兼ね合いでリンク閉鎖しました。
 
 ○デモアカウント<br>
 アドレス：demo@gmail.com<br>
