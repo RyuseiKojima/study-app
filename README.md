@@ -7,7 +7,7 @@ Tech Sharing
 
 ○アプリリンク<br>
 **https://technoshared.com**
-→無料期間の兼ね合いでリンク閉鎖しました。
+→AWSの無料期間の兼ね合いでリンク閉鎖しました。
 
 ○デモアカウント<br>
 アドレス：demo@gmail.com<br>
